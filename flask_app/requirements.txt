@@ -1,5 +1,9 @@
+fiona>=1.8.20
 flask>=2.0.1
+geopandas>=0.9.0
+mercantile>=1.2.1
 morecantile>=2.1.2
 pyproj>=3.1.0
 rasterio>=1.1.7
 rio-tiler>=2.1.2
+shapely>=1.7.1

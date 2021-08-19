@@ -14,8 +14,8 @@ from rio_tiler.utils import render
 
 imagery: Blueprint = Blueprint('imagery', __name__)
 
-@imagery.route('/tiles')
-def get_tiles() -> Response:
+@imagery.route('/imagery-tiles')
+def get_imagery_tiles() -> Response:
     image: COGReader = current_app.config.get('COG')
     tms: TileMatrixSet = morecantile.tms.get('WebMercatorQuad')
     data: Dict[str, Any] = {
@@ -25,7 +25,7 @@ def get_tiles() -> Response:
         'bbox': image.bounds,
         'tiles': []
     }
-    zooms: List[int] = list(range(data.get('min_zoom'), data.get('max_zoom')))
+    zooms: List[int] = list(range(data.get('min_zoom'), data.get('max_zoom') + 1))
     tiles: List[Tile] = list(tms.tiles(*image.bounds, zooms=zooms))
     for tile in tiles:
         data['tiles'].append(
