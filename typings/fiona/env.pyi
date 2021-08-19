@@ -8,14 +8,13 @@ import attr
 from functools import total_ordering
 
 """Fiona's GDAL/AWS environment"""
-class ThreadEnv(threading.local):
-    def __init__(self) -> None:
-        ...
-    
 
+class ThreadEnv(threading.local):
+    def __init__(self) -> None: ...
 
 local = ...
 log = ...
+
 class Env:
     """Abstraction for GDAL and AWS configuration
 
@@ -48,8 +47,9 @@ class Env:
     will be created as soon as needed. AWS credentials are configured
     for GDAL as needed.
     """
+
     @classmethod
-    def default_options(cls): # -> dict[str, bool]:
+    def default_options(cls):  # -> dict[str, bool]:
         """Default configuration options
 
         Parameters
@@ -61,7 +61,6 @@ class Env:
         dict
         """
         ...
-    
     def __init__(self, session=..., **options) -> None:
         """Create a new GDAL/AWS environment.
 
@@ -105,9 +104,8 @@ class Env:
 
         """
         ...
-    
     @classmethod
-    def from_defaults(cls, session=..., **options): # -> Env:
+    def from_defaults(cls, session=..., **options):  # -> Env:
         """Create an environment with default config options
 
         Parameters
@@ -128,9 +126,8 @@ class Env:
 
         """
         ...
-    
     @property
-    def is_credentialized(self): # -> bool:
+    def is_credentialized(self):  # -> bool:
         """Test for existence of cloud credentials
 
         Returns
@@ -138,8 +135,7 @@ class Env:
         bool
         """
         ...
-    
-    def credentialize(self): # -> None:
+    def credentialize(self):  # -> None:
         """Get credentials and configure GDAL
 
         Note well: this method is a no-op if the GDAL environment
@@ -151,20 +147,13 @@ class Env:
 
         """
         ...
-    
     def drivers(self):
         """Return a mapping of registered drivers."""
         ...
-    
-    def __enter__(self): # -> Env:
-        ...
-    
-    def __exit__(self, exc_type=..., exc_val=..., exc_tb=...): # -> None:
-        ...
-    
+    def __enter__(self): ...
+    def __exit__(self, exc_type=..., exc_val=..., exc_tb=...): ...
 
-
-def defenv(**options): # -> None:
+def defenv(**options):  # -> None:
     """Create a default environment if necessary."""
     ...
 
@@ -172,33 +161,22 @@ def getenv():
     """Get a mapping of current options."""
     ...
 
-def hasenv(): # -> bool:
-    ...
-
-def setenv(**options): # -> None:
+def hasenv(): ...
+def setenv(**options):  # -> None:
     """Set options in the existing environment."""
     ...
 
-def hascreds(): # -> bool:
-    ...
-
-def delenv(): # -> None:
+def hascreds(): ...
+def delenv():  # -> None:
     """Delete options in the existing environment."""
     ...
 
 class NullContextManager:
-    def __init__(self) -> None:
-        ...
-    
-    def __enter__(self): # -> NullContextManager:
-        ...
-    
-    def __exit__(self, *args): # -> None:
-        ...
-    
+    def __init__(self) -> None: ...
+    def __enter__(self): ...
+    def __exit__(self, *args): ...
 
-
-def env_ctx_if_needed(): # -> NullContextManager | Env:
+def env_ctx_if_needed():  # -> NullContextManager | Env:
     """Return an Env if one does not exist
 
     Returns
@@ -208,7 +186,7 @@ def env_ctx_if_needed(): # -> NullContextManager | Env:
     """
     ...
 
-def ensure_env(f): # -> (*args: Unknown, **kwargs: Unknown) -> Unknown:
+def ensure_env(f):  # -> (*args: Unknown, **kwargs: Unknown) -> Unknown:
     """A decorator that ensures an env exists before a function
     calls any GDAL C functions.
 
@@ -229,7 +207,9 @@ def ensure_env(f): # -> (*args: Unknown, **kwargs: Unknown) -> Unknown:
     """
     ...
 
-def ensure_env_with_credentials(f): # -> (*args: Unknown, **kwargs: Unknown) -> Unknown:
+def ensure_env_with_credentials(
+    f,
+):  # -> (*args: Unknown, **kwargs: Unknown) -> Unknown:
     """Ensures a config environment exists and has credentials.
 
     Parameters
@@ -261,22 +241,15 @@ class GDALVersion:
     simplistic and assumes a very normal numbering scheme for versions
     and ignores everything except the major and minor components.
     """
+
     major = ...
     minor = ...
-    def __eq__(self, other) -> bool:
-        ...
-    
-    def __lt__(self, other) -> bool:
-        ...
-    
-    def __repr__(self): # -> str:
-        ...
-    
-    def __str__(self) -> str:
-        ...
-    
+    def __eq__(self, other) -> bool: ...
+    def __lt__(self, other) -> bool: ...
+    def __repr__(self): ...
+    def __str__(self) -> str: ...
     @classmethod
-    def parse(cls, input): # -> GDALVersion:
+    def parse(cls, input):  # -> GDALVersion:
         """
         Parses input tuple or string to GDALVersion. If input is a GDALVersion
         instance, it is returned.
@@ -290,18 +263,15 @@ class GDALVersion:
         GDALVersion instance
         """
         ...
-    
     @classmethod
-    def runtime(cls): # -> GDALVersion:
+    def runtime(cls):  # -> GDALVersion:
         """Return GDALVersion of current GDAL runtime"""
         ...
-    
-    def at_least(self, other): # -> bool:
-        ...
-    
+    def at_least(self, other): ...
 
-
-def require_gdal_version(version, param=..., values=..., is_max_version=..., reason=...): # -> (f: Unknown) -> (*args: Unknown, **kwds: Unknown) -> Unknown:
+def require_gdal_version(
+    version, param=..., values=..., is_max_version=..., reason=...
+):  # -> (f: Unknown) -> (*args: Unknown, **kwds: Unknown) -> Unknown:
     """A decorator that ensures the called function or parameters are supported
     by the runtime version of GDAL.  Raises GDALVersionError if conditions
     are not met.
@@ -352,7 +322,7 @@ def require_gdal_version(version, param=..., values=..., is_max_version=..., rea
     """
     ...
 
-if 'GDAL_DATA' not in os.environ:
+if "GDAL_DATA" not in os.environ:
     path = ...
 if "PROJ_LIB" in os.environ:
     path = ...

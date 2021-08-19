@@ -10,37 +10,20 @@ to GEOS functions via ctypes.
 
 These methods return ctypes objects that should be recast by the caller.
 """
-class Validating:
-    ...
 
+class Validating: ...
 
 class Delegating(Validating):
-    def __init__(self, name) -> None:
-        ...
-    
-
+    def __init__(self, name) -> None: ...
 
 class BinaryRealProperty(Delegating):
-    def __call__(self, this, other): # -> float:
-        ...
-    
-
+    def __call__(self, this, other): ...
 
 class UnaryRealProperty(Delegating):
-    def __call__(self, this): # -> float:
-        ...
-    
-
+    def __call__(self, this): ...
 
 class BinaryTopologicalOp(Delegating):
-    def __call__(self, this, other, *args):
-        ...
-    
-
+    def __call__(self, this, other, *args): ...
 
 class UnaryTopologicalOp(Delegating):
-    def __call__(self, this, *args):
-        ...
-    
-
-
+    def __call__(self, this, *args): ...

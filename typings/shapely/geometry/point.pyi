@@ -7,6 +7,7 @@ from shapely.geometry.proxy import CachingGeometryProxy
 
 """Points and related utilities
 """
+
 class Point(BaseGeometry):
     """
     A zero dimensional feature
@@ -28,6 +29,7 @@ class Point(BaseGeometry):
       >>> p.x
       1.0
     """
+
     def __init__(self, *args) -> None:
         """
         Parameters
@@ -39,27 +41,21 @@ class Point(BaseGeometry):
             Easting, northing, and elevation.
         """
         ...
-    
     @property
-    def x(self): # -> Any:
+    def x(self):  # -> Any:
         """Return x coordinate."""
         ...
-    
     @property
-    def y(self): # -> Any:
+    def y(self):  # -> Any:
         """Return y coordinate."""
         ...
-    
     @property
-    def z(self): # -> Any:
+    def z(self):  # -> Any:
         """Return z coordinate."""
         ...
-    
     @property
-    def __geo_interface__(self): # -> dict[str, str | Any]:
-        ...
-    
-    def svg(self, scale_factor=..., fill_color=...): # -> str:
+    def __geo_interface__(self): ...
+    def svg(self, scale_factor=..., fill_color=...):  # -> str:
         """Returns SVG circle element for the Point geometry.
 
         Parameters
@@ -71,24 +67,21 @@ class Point(BaseGeometry):
             geometry is valid, and "#ff3333" if invalid.
         """
         ...
-    
     @property
-    def ctypes(self): # -> Array[c_double]:
-        ...
-    
-    def array_interface(self): # -> dict[str, int | str | tuple[Literal[0]] | Array[c_double]] | dict[str, int | str | Unknown]:
+    def ctypes(self): ...
+    def array_interface(
+        self,
+    ):  # -> dict[str, int | str | tuple[Literal[0]] | Array[c_double]] | dict[str, int | str | Unknown]:
         """Provide the Numpy array protocol."""
         ...
-    
     __array_interface__ = ...
     @property
-    def bounds(self): # -> tuple[()] | tuple[Any, Any, Any, Any]:
+    def bounds(self):  # -> tuple[()] | tuple[Any, Any, Any, Any]:
         """Returns minimum bounding region (minx, miny, maxx, maxy)"""
         ...
-    
     coords = ...
     @property
-    def xy(self): # -> Any:
+    def xy(self):  # -> Any:
         """Separate arrays of X and Y coordinate values
 
         Example:
@@ -99,28 +92,26 @@ class Point(BaseGeometry):
           [0.0]
         """
         ...
-    
-
 
 class PointAdapter(CachingGeometryProxy, Point):
     _other_owned = ...
-    def __init__(self, context) -> None:
-        ...
-    
+    def __init__(self, context) -> None: ...
     @property
-    def __array_interface__(self): # -> dict[str, int | str | tuple[Literal[0]] | Array[c_double]] | dict[str, int | str | Unknown]:
+    def __array_interface__(
+        self,
+    ):  # -> dict[str, int | str | tuple[Literal[0]] | Array[c_double]] | dict[str, int | str | Unknown]:
         """Provide the Numpy array protocol."""
         ...
-    
     _get_coords = ...
     coords = ...
 
-
-def asPoint(context): # -> PointAdapter:
+def asPoint(context):  # -> PointAdapter:
     """Adapt an object to the Point interface"""
     ...
 
-def geos_point_from_py(ob, update_geom=..., update_ndim=...): # -> tuple[Any | Unknown, Unknown] | tuple[Any, int] | None:
+def geos_point_from_py(
+    ob, update_geom=..., update_ndim=...
+):  # -> tuple[Any | Unknown, Unknown] | tuple[Any, int] | None:
     """Create a GEOS geom from an object that is a Point, a coordinate sequence
     or that provides the array interface.
 
@@ -128,6 +119,4 @@ def geos_point_from_py(ob, update_geom=..., update_ndim=...): # -> tuple[Any | U
     """
     ...
 
-def update_point_from_py(geom, ob): # -> None:
-    ...
-
+def update_point_from_py(geom, ob): ...

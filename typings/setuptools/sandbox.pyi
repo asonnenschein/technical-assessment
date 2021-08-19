@@ -8,63 +8,52 @@ import contextlib
 import org.python.modules.posix.PosixModule as _os
 from distutils.errors import DistutilsError
 
-if sys.platform.startswith('java'):
-    ...
+if sys.platform.startswith("java"): ...
 else:
     _os = ...
 _open = ...
-@contextlib.contextmanager
-def save_argv(repl=...): # -> Generator[List[str], None, None]:
-    ...
 
 @contextlib.contextmanager
-def save_path(): # -> Generator[List[str], None, None]:
-    ...
-
+def save_argv(repl=...): ...
 @contextlib.contextmanager
-def override_temp(replacement): # -> Generator[None, None, None]:
+def save_path(): ...
+@contextlib.contextmanager
+def override_temp(replacement):  # -> Generator[None, None, None]:
     """
     Monkey-patch tempfile.tempdir with replacement, ensuring it exists
     """
     ...
 
 @contextlib.contextmanager
-def pushd(target): # -> Generator[str, None, None]:
-    ...
+def pushd(target): ...
 
 class UnpickleableException(Exception):
     """
     An exception representing another Exception that could not be pickled.
     """
+
     @staticmethod
-    def dump(type, exc): # -> tuple[bytes, bytes]:
+    def dump(type, exc):  # -> tuple[bytes, bytes]:
         """
         Always return a dumped (pickled) type and exc. If exc can't be pickled,
         wrap it in UnpickleableException first.
         """
         ...
-    
-
 
 class ExceptionSaver:
     """
     A Context Manager that will save an exception, serialized, and restore it
     later.
     """
-    def __enter__(self): # -> ExceptionSaver:
-        ...
-    
-    def __exit__(self, type, exc, tb): # -> Literal[True] | None:
-        ...
-    
-    def resume(self): # -> None:
+
+    def __enter__(self): ...
+    def __exit__(self, type, exc, tb): ...
+    def resume(self):  # -> None:
         "restore and re-raise any exception"
         ...
-    
-
 
 @contextlib.contextmanager
-def save_modules(): # -> Generator[Dict[str, ModuleType], None, None]:
+def save_modules():  # -> Generator[Dict[str, ModuleType], None, None]:
     """
     Context in which imported modules are saved.
 
@@ -74,15 +63,13 @@ def save_modules(): # -> Generator[Dict[str, ModuleType], None, None]:
     ...
 
 @contextlib.contextmanager
-def save_pkg_resources_state(): # -> Generator[Unknown, None, None]:
-    ...
-
+def save_pkg_resources_state(): ...
 @contextlib.contextmanager
-def setup_context(setup_dir): # -> Generator[None, None, None]:
-    ...
+def setup_context(setup_dir): ...
 
 _MODULES_TO_HIDE = ...
-def hide_setuptools(): # -> None:
+
+def hide_setuptools():  # -> None:
     """
     Remove references to setuptools' modules from sys.modules to allow the
     invocation to import the most appropriate setuptools. This technique is
@@ -91,59 +78,45 @@ def hide_setuptools(): # -> None:
     """
     ...
 
-def run_setup(setup_script, args): # -> None:
+def run_setup(setup_script, args):  # -> None:
     """Run a distutils setup script, sandboxed in its directory"""
     ...
 
 class AbstractSandbox:
     """Wrap 'os' module and 'open()' builtin for virtualizing setup scripts"""
+
     _active = ...
-    def __init__(self) -> None:
-        ...
-    
-    def __enter__(self): # -> None:
-        ...
-    
-    def __exit__(self, exc_type, exc_value, traceback): # -> None:
-        ...
-    
+    def __init__(self) -> None: ...
+    def __enter__(self): ...
+    def __exit__(self, exc_type, exc_value, traceback): ...
     def run(self, func):
         """Run 'func' under os sandboxing"""
         ...
-    
     if _file:
         _file = ...
     _open = ...
 
-
-if hasattr(os, 'devnull'):
+if hasattr(os, "devnull"):
     _EXCEPTIONS = ...
 else:
     _EXCEPTIONS = ...
+
 class DirectorySandbox(AbstractSandbox):
     """Restrict operations to a single subdirectory - pseudo-chroot"""
+
     write_ops = ...
     _exception_patterns = ...
-    def __init__(self, sandbox, exceptions=...) -> None:
-        ...
-    
-    if _file:
-        ...
-    def tmpnam(self): # -> NoReturn:
-        ...
-    
+    def __init__(self, sandbox, exceptions=...) -> None: ...
+    if _file: ...
+    def tmpnam(self): ...
     def open(self, file, flags, mode=..., *args, **kw):
         """Called for low-level os.open()"""
         ...
-    
-
 
 WRITE_FLAGS = ...
+
 class SandboxViolation(DistutilsError):
     """A setup script attempted to modify the filesystem outside the sandbox"""
+
     tmpl = ...
-    def __str__(self) -> str:
-        ...
-    
-
-
+    def __str__(self) -> str: ...

@@ -10,21 +10,11 @@ Customized Mixin2to3 support:
 
  - adds support for converting doctests
 """
-class DistutilsRefactoringTool(RefactoringTool):
-    def log_error(self, msg, *args, **kw): # -> None:
-        ...
-    
-    def log_message(self, msg, *args): # -> None:
-        ...
-    
-    def log_debug(self, msg, *args): # -> None:
-        ...
-    
 
+class DistutilsRefactoringTool(RefactoringTool):
+    def log_error(self, msg, *args, **kw): ...
+    def log_message(self, msg, *args): ...
+    def log_debug(self, msg, *args): ...
 
 class Mixin2to3(_Mixin2to3):
-    def run_2to3(self, files, doctests=...): # -> None:
-        ...
-    
-
-
+    def run_2to3(self, files, doctests=...): ...

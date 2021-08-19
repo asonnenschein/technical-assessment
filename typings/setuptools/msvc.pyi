@@ -25,19 +25,17 @@ Microsoft Visual C++ 14.X:
 
 This may also support compilers shipped with compatible Visual Studio versions.
 """
-if platform.system() == 'Windows':
-    ...
+if platform.system() == "Windows": ...
 else:
     class winreg:
         HKEY_USERS = ...
         HKEY_CURRENT_USER = ...
         HKEY_LOCAL_MACHINE = ...
         HKEY_CLASSES_ROOT = ...
-    
-    
     environ = ...
 _msvc9_suppress_errors = ...
-def msvc9_find_vcvarsall(version): # -> str | Any:
+
+def msvc9_find_vcvarsall(version):  # -> str | Any:
     """
     Patched "distutils.msvc9compiler.find_vcvarsall" to use the standalone
     compiler build for Python
@@ -60,7 +58,7 @@ def msvc9_find_vcvarsall(version): # -> str | Any:
     """
     ...
 
-def msvc9_query_vcvarsall(ver, arch=..., *args, **kwargs): # -> Any | dict[str, str]:
+def msvc9_query_vcvarsall(ver, arch=..., *args, **kwargs):  # -> Any | dict[str, str]:
     """
     Patched "distutils.msvc9compiler.query_vcvarsall" for support extra
     Microsoft Visual C++ 9.0 and 10.0 compilers.
@@ -82,7 +80,10 @@ def msvc9_query_vcvarsall(ver, arch=..., *args, **kwargs): # -> Any | dict[str, 
     ...
 
 PLAT_SPEC_TO_RUNTIME = ...
-def msvc14_get_vc_env(plat_spec): # -> dict[str | Unknown, str | Unknown] | dict[str, str]:
+
+def msvc14_get_vc_env(
+    plat_spec,
+):  # -> dict[str | Unknown, str | Unknown] | dict[str, str]:
     """
     Patched "distutils._msvccompiler._get_vc_env" for support extra
     Microsoft Visual C++ 14.X compilers.
@@ -101,7 +102,7 @@ def msvc14_get_vc_env(plat_spec): # -> dict[str | Unknown, str | Unknown] | dict
     """
     ...
 
-def msvc14_gen_lib_options(*args, **kwargs): # -> Any:
+def msvc14_gen_lib_options(*args, **kwargs):  # -> Any:
     """
     Patched "distutils._msvccompiler.gen_lib_options" for fix
     compatibility between "numpy.distutils" and "distutils._msvccompiler"
@@ -118,10 +119,9 @@ class PlatformInfo:
     arch: str
         Target architecture.
     """
+
     current_cpu = ...
-    def __init__(self, arch) -> None:
-        ...
-    
+    def __init__(self, arch) -> None: ...
     @property
     def target_cpu(self):
         """
@@ -133,7 +133,6 @@ class PlatformInfo:
             Target CPU
         """
         ...
-    
     def target_is_x86(self):
         """
         Return True if target CPU is x86 32 bits..
@@ -144,8 +143,7 @@ class PlatformInfo:
             CPU is x86 32 bits
         """
         ...
-    
-    def current_is_x86(self): # -> bool:
+    def current_is_x86(self):  # -> bool:
         """
         Return True if current CPU is x86 32 bits..
 
@@ -155,8 +153,7 @@ class PlatformInfo:
             CPU is x86 32 bits
         """
         ...
-    
-    def current_dir(self, hidex86=..., x64=...): # -> str:
+    def current_dir(self, hidex86=..., x64=...):  # -> str:
         """
         Current platform specific subfolder.
 
@@ -173,8 +170,7 @@ class PlatformInfo:
             subfolder: '\target', or '' (see hidex86 parameter)
         """
         ...
-    
-    def target_dir(self, hidex86=..., x64=...): # -> Literal['', '\\x64']:
+    def target_dir(self, hidex86=..., x64=...):  # -> Literal['', '\\x64']:
         r"""
         Target platform specific subfolder.
 
@@ -191,8 +187,7 @@ class PlatformInfo:
             subfolder: '\current', or '' (see hidex86 parameter)
         """
         ...
-    
-    def cross_dir(self, forcex86=...): # -> str:
+    def cross_dir(self, forcex86=...):  # -> str:
         r"""
         Cross platform specific subfolder.
 
@@ -209,8 +204,6 @@ class PlatformInfo:
             '\current_target' if not.
         """
         ...
-    
-
 
 class RegistryInfo:
     """
@@ -221,12 +214,11 @@ class RegistryInfo:
     platform_info: PlatformInfo
         "PlatformInfo" instance.
     """
+
     HKEYS = ...
-    def __init__(self, platform_info) -> None:
-        ...
-    
+    def __init__(self, platform_info) -> None: ...
     @property
-    def visualstudio(self): # -> Literal['VisualStudio']:
+    def visualstudio(self):  # -> Literal['VisualStudio']:
         """
         Microsoft Visual Studio root registry key.
 
@@ -236,9 +228,8 @@ class RegistryInfo:
             Registry key
         """
         ...
-    
     @property
-    def sxs(self): # -> str:
+    def sxs(self):  # -> str:
         """
         Microsoft Visual Studio SxS registry key.
 
@@ -248,9 +239,8 @@ class RegistryInfo:
             Registry key
         """
         ...
-    
     @property
-    def vc(self): # -> str:
+    def vc(self):  # -> str:
         """
         Microsoft Visual C++ VC7 registry key.
 
@@ -260,9 +250,8 @@ class RegistryInfo:
             Registry key
         """
         ...
-    
     @property
-    def vs(self): # -> str:
+    def vs(self):  # -> str:
         """
         Microsoft Visual Studio VS7 registry key.
 
@@ -272,9 +261,8 @@ class RegistryInfo:
             Registry key
         """
         ...
-    
     @property
-    def vc_for_python(self): # -> Literal['DevDiv\\VCForPython']:
+    def vc_for_python(self):  # -> Literal['DevDiv\\VCForPython']:
         """
         Microsoft Visual C++ for Python registry key.
 
@@ -284,9 +272,8 @@ class RegistryInfo:
             Registry key
         """
         ...
-    
     @property
-    def microsoft_sdk(self): # -> Literal['Microsoft SDKs']:
+    def microsoft_sdk(self):  # -> Literal['Microsoft SDKs']:
         """
         Microsoft SDK registry key.
 
@@ -296,9 +283,8 @@ class RegistryInfo:
             Registry key
         """
         ...
-    
     @property
-    def windows_sdk(self): # -> str:
+    def windows_sdk(self):  # -> str:
         """
         Microsoft Windows/Platform SDK registry key.
 
@@ -308,9 +294,8 @@ class RegistryInfo:
             Registry key
         """
         ...
-    
     @property
-    def netfx_sdk(self): # -> str:
+    def netfx_sdk(self):  # -> str:
         """
         Microsoft .NET Framework SDK registry key.
 
@@ -320,9 +305,8 @@ class RegistryInfo:
             Registry key
         """
         ...
-    
     @property
-    def windows_kits_roots(self): # -> Literal['Windows Kits\\Installed Roots']:
+    def windows_kits_roots(self):  # -> Literal['Windows Kits\\Installed Roots']:
         """
         Microsoft Windows Kits Roots registry key.
 
@@ -332,8 +316,7 @@ class RegistryInfo:
             Registry key
         """
         ...
-    
-    def microsoft(self, key, x86=...): # -> str:
+    def microsoft(self, key, x86=...):  # -> str:
         """
         Return key in Microsoft software registry.
 
@@ -350,8 +333,7 @@ class RegistryInfo:
             Registry key
         """
         ...
-    
-    def lookup(self, key, name): # -> None:
+    def lookup(self, key, name):  # -> None:
         """
         Look for values in registry in Microsoft software registry.
 
@@ -368,8 +350,6 @@ class RegistryInfo:
             value
         """
         ...
-    
-
 
 class SystemInfo:
     """
@@ -382,13 +362,12 @@ class SystemInfo:
     vc_ver: float
         Required Microsoft Visual C++ version.
     """
+
     WinDir = ...
     ProgramFiles = ...
     ProgramFilesx86 = ...
-    def __init__(self, registry_info, vc_ver=...) -> None:
-        ...
-    
-    def find_reg_vs_vers(self): # -> List[Unknown]:
+    def __init__(self, registry_info, vc_ver=...) -> None: ...
+    def find_reg_vs_vers(self):  # -> List[Unknown]:
         """
         Find Microsoft Visual Studio versions available in registry.
 
@@ -398,8 +377,7 @@ class SystemInfo:
             Versions
         """
         ...
-    
-    def find_programdata_vs_vers(self): # -> dict[Unknown, Unknown]:
+    def find_programdata_vs_vers(self):  # -> dict[Unknown, Unknown]:
         r"""
         Find Visual studio 2017+ versions from information in
         "C:\ProgramData\Microsoft\VisualStudio\Packages\_Instances".
@@ -410,9 +388,8 @@ class SystemInfo:
             float version as key, path as value.
         """
         ...
-    
     @property
-    def VSInstallDir(self): # -> str:
+    def VSInstallDir(self):  # -> str:
         """
         Microsoft Visual Studio directory.
 
@@ -422,9 +399,8 @@ class SystemInfo:
             path
         """
         ...
-    
     @property
-    def VCInstallDir(self): # -> str:
+    def VCInstallDir(self):  # -> str:
         """
         Microsoft Visual C++ directory.
 
@@ -434,9 +410,10 @@ class SystemInfo:
             path
         """
         ...
-    
     @property
-    def WindowsSdkVersion(self): # -> tuple[Literal['7.0'], Literal['6.1'], Literal['6.0a']] | tuple[Literal['7.1'], Literal['7.0a']] | tuple[Literal['8.0'], Literal['8.0a']] | tuple[Literal['8.1'], Literal['8.1a']] | tuple[Literal['10.0'], Literal['8.1']] | None:
+    def WindowsSdkVersion(
+        self,
+    ):  # -> tuple[Literal['7.0'], Literal['6.1'], Literal['6.0a']] | tuple[Literal['7.1'], Literal['7.0a']] | tuple[Literal['8.0'], Literal['8.0a']] | tuple[Literal['8.1'], Literal['8.1a']] | tuple[Literal['10.0'], Literal['8.1']] | None:
         """
         Microsoft Windows SDK versions for specified MSVC++ version.
 
@@ -446,9 +423,8 @@ class SystemInfo:
             versions
         """
         ...
-    
     @property
-    def WindowsSdkLastVersion(self): # -> str:
+    def WindowsSdkLastVersion(self):  # -> str:
         """
         Microsoft Windows SDK last version.
 
@@ -458,9 +434,8 @@ class SystemInfo:
             version
         """
         ...
-    
     @property
-    def WindowsSdkDir(self): # -> str:
+    def WindowsSdkDir(self):  # -> str:
         """
         Microsoft Windows SDK directory.
 
@@ -470,9 +445,8 @@ class SystemInfo:
             path
         """
         ...
-    
     @property
-    def WindowsSDKExecutablePath(self): # -> None:
+    def WindowsSDKExecutablePath(self):  # -> None:
         """
         Microsoft Windows SDK executable directory.
 
@@ -482,9 +456,8 @@ class SystemInfo:
             path
         """
         ...
-    
     @property
-    def FSharpInstallDir(self): # -> Literal['']:
+    def FSharpInstallDir(self):  # -> Literal['']:
         """
         Microsoft Visual F# directory.
 
@@ -494,9 +467,8 @@ class SystemInfo:
             path
         """
         ...
-    
     @property
-    def UniversalCRTSdkDir(self): # -> Literal[''] | None:
+    def UniversalCRTSdkDir(self):  # -> Literal[''] | None:
         """
         Microsoft Universal CRT SDK directory.
 
@@ -506,9 +478,8 @@ class SystemInfo:
             path
         """
         ...
-    
     @property
-    def UniversalCRTSdkLastVersion(self): # -> str:
+    def UniversalCRTSdkLastVersion(self):  # -> str:
         """
         Microsoft Universal C Runtime SDK last version.
 
@@ -518,9 +489,10 @@ class SystemInfo:
             version
         """
         ...
-    
     @property
-    def NetFxSdkVersion(self): # -> tuple[Literal['4.7.2'], Literal['4.7.1'], Literal['4.7'], Literal['4.6.2'], Literal['4.6.1'], Literal['4.6'], Literal['4.5.2'], Literal['4.5.1'], Literal['4.5']] | tuple[()]:
+    def NetFxSdkVersion(
+        self,
+    ):  # -> tuple[Literal['4.7.2'], Literal['4.7.1'], Literal['4.7'], Literal['4.6.2'], Literal['4.6.1'], Literal['4.6'], Literal['4.5.2'], Literal['4.5.1'], Literal['4.5']] | tuple[()]:
         """
         Microsoft .NET Framework SDK versions.
 
@@ -530,9 +502,8 @@ class SystemInfo:
             versions
         """
         ...
-    
     @property
-    def NetFxSdkDir(self): # -> Literal['']:
+    def NetFxSdkDir(self):  # -> Literal['']:
         """
         Microsoft .NET Framework SDK directory.
 
@@ -542,9 +513,8 @@ class SystemInfo:
             path
         """
         ...
-    
     @property
-    def FrameworkDir32(self): # -> str:
+    def FrameworkDir32(self):  # -> str:
         """
         Microsoft .NET Framework 32bit directory.
 
@@ -554,9 +524,8 @@ class SystemInfo:
             path
         """
         ...
-    
     @property
-    def FrameworkDir64(self): # -> str:
+    def FrameworkDir64(self):  # -> str:
         """
         Microsoft .NET Framework 64bit directory.
 
@@ -566,9 +535,10 @@ class SystemInfo:
             path
         """
         ...
-    
     @property
-    def FrameworkVersion32(self): # -> tuple[Unknown | str, Literal['v4.0']] | tuple[Unknown | str, Literal['v3.5']] | tuple[Literal['v3.5'], Literal['v2.0.50727']] | tuple[Literal['v3.0'], Literal['v2.0.50727']] | None:
+    def FrameworkVersion32(
+        self,
+    ):  # -> tuple[Unknown | str, Literal['v4.0']] | tuple[Unknown | str, Literal['v3.5']] | tuple[Literal['v3.5'], Literal['v2.0.50727']] | tuple[Literal['v3.0'], Literal['v2.0.50727']] | None:
         """
         Microsoft .NET Framework 32bit versions.
 
@@ -578,9 +548,10 @@ class SystemInfo:
             versions
         """
         ...
-    
     @property
-    def FrameworkVersion64(self): # -> tuple[Unknown | str, Literal['v4.0']] | tuple[Unknown | str, Literal['v3.5']] | tuple[Literal['v3.5'], Literal['v2.0.50727']] | tuple[Literal['v3.0'], Literal['v2.0.50727']] | None:
+    def FrameworkVersion64(
+        self,
+    ):  # -> tuple[Unknown | str, Literal['v4.0']] | tuple[Unknown | str, Literal['v3.5']] | tuple[Literal['v3.5'], Literal['v2.0.50727']] | tuple[Literal['v3.0'], Literal['v2.0.50727']] | None:
         """
         Microsoft .NET Framework 64bit versions.
 
@@ -590,8 +561,6 @@ class SystemInfo:
             versions
         """
         ...
-    
-
 
 class EnvironmentInfo:
     """
@@ -613,9 +582,8 @@ class EnvironmentInfo:
     vc_min_ver: float
         Minimum Microsoft Visual C++ version.
     """
-    def __init__(self, arch, vc_ver=..., vc_min_ver=...) -> None:
-        ...
-    
+
+    def __init__(self, arch, vc_ver=..., vc_min_ver=...) -> None: ...
     @property
     def vs_ver(self):
         """
@@ -627,9 +595,8 @@ class EnvironmentInfo:
             version
         """
         ...
-    
     @property
-    def vc_ver(self): # -> float:
+    def vc_ver(self):  # -> float:
         """
         Microsoft Visual C++ version.
 
@@ -639,9 +606,8 @@ class EnvironmentInfo:
             version
         """
         ...
-    
     @property
-    def VSTools(self): # -> list[str]:
+    def VSTools(self):  # -> list[str]:
         """
         Microsoft Visual Studio Tools.
 
@@ -651,9 +617,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def VCIncludes(self): # -> list[str]:
+    def VCIncludes(self):  # -> list[str]:
         """
         Microsoft Visual C++ & Microsoft Foundation Class Includes.
 
@@ -663,9 +628,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def VCLibraries(self): # -> list[str]:
+    def VCLibraries(self):  # -> list[str]:
         """
         Microsoft Visual C++ & Microsoft Foundation Class Libraries.
 
@@ -675,9 +639,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def VCStoreRefs(self): # -> list[str]:
+    def VCStoreRefs(self):  # -> list[str]:
         """
         Microsoft Visual C++ store references Libraries.
 
@@ -687,9 +650,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def VCTools(self): # -> list[str]:
+    def VCTools(self):  # -> list[str]:
         """
         Microsoft Visual C++ Tools.
 
@@ -699,9 +661,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def OSLibraries(self): # -> list[str]:
+    def OSLibraries(self):  # -> list[str]:
         """
         Microsoft Windows SDK Libraries.
 
@@ -711,9 +672,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def OSIncludes(self): # -> list[str]:
+    def OSIncludes(self):  # -> list[str]:
         """
         Microsoft Windows SDK Include.
 
@@ -723,9 +683,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def OSLibpath(self): # -> list[Unknown]:
+    def OSLibpath(self):  # -> list[Unknown]:
         """
         Microsoft Windows SDK Libraries Paths.
 
@@ -735,9 +694,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def SdkTools(self): # -> list[str | Unknown]:
+    def SdkTools(self):  # -> list[str | Unknown]:
         """
         Microsoft Windows SDK Tools.
 
@@ -747,9 +705,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def SdkSetup(self): # -> list[str]:
+    def SdkSetup(self):  # -> list[str]:
         """
         Microsoft Windows SDK Setup.
 
@@ -759,9 +716,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def FxTools(self): # -> list[Unknown]:
+    def FxTools(self):  # -> list[Unknown]:
         """
         Microsoft .NET Framework Tools.
 
@@ -771,9 +727,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def NetFxSDKLibraries(self): # -> list[str]:
+    def NetFxSDKLibraries(self):  # -> list[str]:
         """
         Microsoft .Net Framework SDK Libraries.
 
@@ -783,9 +738,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def NetFxSDKIncludes(self): # -> list[str]:
+    def NetFxSDKIncludes(self):  # -> list[str]:
         """
         Microsoft .Net Framework SDK Includes.
 
@@ -795,9 +749,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def VsTDb(self): # -> list[str]:
+    def VsTDb(self):  # -> list[str]:
         """
         Microsoft Visual Studio Team System Database.
 
@@ -807,9 +760,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def MSBuild(self): # -> list[str]:
+    def MSBuild(self):  # -> list[str]:
         """
         Microsoft Build Engine.
 
@@ -819,9 +771,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def HTMLHelpWorkshop(self): # -> list[str]:
+    def HTMLHelpWorkshop(self):  # -> list[str]:
         """
         Microsoft HTML Help Workshop.
 
@@ -831,9 +782,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def UCRTLibraries(self): # -> list[str]:
+    def UCRTLibraries(self):  # -> list[str]:
         """
         Microsoft Universal C Runtime SDK Libraries.
 
@@ -843,9 +793,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def UCRTIncludes(self): # -> list[str]:
+    def UCRTIncludes(self):  # -> list[str]:
         """
         Microsoft Universal C Runtime SDK Include.
 
@@ -855,9 +804,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def FSharp(self): # -> list[Unknown | str]:
+    def FSharp(self):  # -> list[Unknown | str]:
         """
         Microsoft Visual F#.
 
@@ -867,9 +815,8 @@ class EnvironmentInfo:
             paths
         """
         ...
-    
     @property
-    def VCRuntimeRedist(self): # -> str | None:
+    def VCRuntimeRedist(self):  # -> str | None:
         """
         Microsoft Visual C++ runtime redistributable dll.
 
@@ -879,8 +826,7 @@ class EnvironmentInfo:
             path
         """
         ...
-    
-    def return_env(self, exists=...): # -> dict[str, str]:
+    def return_env(self, exists=...):  # -> dict[str, str]:
         """
         Return environment dict.
 
@@ -895,6 +841,3 @@ class EnvironmentInfo:
             environment
         """
         ...
-    
-
-

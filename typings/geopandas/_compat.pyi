@@ -17,7 +17,8 @@ HAS_PYGEOS = ...
 USE_PYGEOS = ...
 PYGEOS_SHAPELY_COMPAT = ...
 PYGEOS_GE_09 = ...
-def set_use_pygeos(val=...): # -> None:
+
+def set_use_pygeos(val=...):  # -> None:
     """
     Set the global configuration on whether to use PyGEOS or not.
 
@@ -31,15 +32,13 @@ def set_use_pygeos(val=...): # -> None:
 
 if shapely_warning is not None and not SHAPELY_GE_20:
     @contextlib.contextmanager
-    def ignore_shapely2_warnings(): # -> Generator[None, None, None]:
-        ...
-    
+    def ignore_shapely2_warnings(): ...
+
 else:
     @contextlib.contextmanager
-    def ignore_shapely2_warnings(): # -> Generator[None, None, None]:
-        ...
-    
-def import_optional_dependency(name: str, extra: str = ...): # -> ModuleType:
+    def ignore_shapely2_warnings(): ...
+
+def import_optional_dependency(name: str, extra: str = ...):  # -> ModuleType:
     """
     Import an optional dependency.
 

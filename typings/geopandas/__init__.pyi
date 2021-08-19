@@ -11,7 +11,10 @@ from geopandas.geoseries import GeoSeries
 from geopandas.geodataframe import GeoDataFrame
 from geopandas.array import points_from_xy
 from geopandas.io.file import _read_file as read_file
-from geopandas.io.arrow import _read_feather as read_feather, _read_parquet as read_parquet
+from geopandas.io.arrow import (
+    _read_feather as read_feather,
+    _read_parquet as read_parquet,
+)
 from geopandas.io.sql import _read_postgis as read_postgis
 from geopandas.tools import clip, overlay, sjoin
 from geopandas.tools._show_versions import show_versions

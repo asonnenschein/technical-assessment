@@ -8,22 +8,20 @@ class StaticModule:
     """
     Attempt to load the module by the name
     """
-    def __init__(self, name) -> None:
-        ...
-    
-    def __getattr__(self, attr): # -> Any:
-        ...
-    
 
+    def __init__(self, name) -> None: ...
+    def __getattr__(self, attr): ...
 
 @contextlib.contextmanager
-def patch_path(path): # -> Generator[None, None, None]:
+def patch_path(path):  # -> Generator[None, None, None]:
     """
     Add path to front of sys.path for the duration of the context.
     """
     ...
 
-def read_configuration(filepath, find_others=..., ignore_option_errors=...): # -> defaultdict[Unknown, dict[Unknown, Unknown]]:
+def read_configuration(
+    filepath, find_others=..., ignore_option_errors=...
+):  # -> defaultdict[Unknown, dict[Unknown, Unknown]]:
     """Read given configuration file and returns options from it as a dict.
 
     :param str|unicode filepath: Path to configuration file
@@ -41,7 +39,7 @@ def read_configuration(filepath, find_others=..., ignore_option_errors=...): # -
     """
     ...
 
-def configuration_to_dict(handlers): # -> defaultdict[Unknown, dict[Unknown, Unknown]]:
+def configuration_to_dict(handlers):  # -> defaultdict[Unknown, dict[Unknown, Unknown]]:
     """Returns configuration data gathered by given handlers as a dict.
 
     :param list[ConfigHandler] handlers: Handlers list,
@@ -51,7 +49,9 @@ def configuration_to_dict(handlers): # -> defaultdict[Unknown, dict[Unknown, Unk
     """
     ...
 
-def parse_configuration(distribution, command_options, ignore_option_errors=...): # -> tuple[ConfigMetadataHandler, ConfigOptionsHandler]:
+def parse_configuration(
+    distribution, command_options, ignore_option_errors=...
+):  # -> tuple[ConfigMetadataHandler, ConfigOptionsHandler]:
     """Performs additional parsing of configuration options
     for a distribution.
 
@@ -69,57 +69,53 @@ def parse_configuration(distribution, command_options, ignore_option_errors=...)
 
 class ConfigHandler:
     """Handles metadata supplied in configuration files."""
+
     section_prefix = ...
     aliases = ...
-    def __init__(self, target_obj, options, ignore_option_errors=...) -> None:
-        ...
-    
+    def __init__(self, target_obj, options, ignore_option_errors=...) -> None: ...
     @property
     def parsers(self):
         """Metadata item name to parser function mapping."""
         ...
-    
-    def __setitem__(self, option_name, value): # -> None:
-        ...
-    
-    def parse_section(self, section_options): # -> None:
+    def __setitem__(self, option_name, value): ...
+    def parse_section(self, section_options):  # -> None:
         """Parses configuration file section.
 
         :param dict section_options:
         """
         ...
-    
-    def parse(self): # -> None:
+    def parse(self):  # -> None:
         """Parses configuration file items from one
         or more related sections.
 
         """
         ...
-    
-
 
 class ConfigMetadataHandler(ConfigHandler):
     section_prefix = ...
     aliases = ...
     strict_mode = ...
-    def __init__(self, target_obj, options, ignore_option_errors=..., package_dir=...) -> None:
-        ...
-    
+    def __init__(
+        self, target_obj, options, ignore_option_errors=..., package_dir=...
+    ) -> None: ...
     @property
-    def parsers(self): # -> dict[str, (value: Unknown, separator: Unknown = ',') -> list[Unknown] | (*args: Unknown, **kwargs: Unknown) -> Unknown | (value: Unknown) -> Unknown | (value: Unknown) -> (Unknown | str) | (value: Unknown) -> (Unknown | str | Any) | (value: Unknown) -> dict[Unknown, Unknown]]:
+    def parsers(
+        self,
+    ):  # -> dict[str, (value: Unknown, separator: Unknown = ',') -> list[Unknown] | (*args: Unknown, **kwargs: Unknown) -> Unknown | (value: Unknown) -> Unknown | (value: Unknown) -> (Unknown | str) | (value: Unknown) -> (Unknown | str | Any) | (value: Unknown) -> dict[Unknown, Unknown]]:
         """Metadata item name to parser function mapping."""
         ...
-    
-
 
 class ConfigOptionsHandler(ConfigHandler):
     section_prefix = ...
     @property
-    def parsers(self): # -> dict[str, (value: Unknown) -> bool | (value: Unknown) -> dict[Unknown, Unknown] | (value: Unknown, separator: Unknown = ',') -> list[Unknown] | partial[list[Unknown]] | (value: Unknown) -> (list[Unknown] | Unknown) | (value: Unknown) -> (Unknown | str) | Unknown | (value: Unknown) -> dict[Unknown, Any]]:
+    def parsers(
+        self,
+    ):  # -> dict[str, (value: Unknown) -> bool | (value: Unknown) -> dict[Unknown, Unknown] | (value: Unknown, separator: Unknown = ',') -> list[Unknown] | partial[list[Unknown]] | (value: Unknown) -> (list[Unknown] | Unknown) | (value: Unknown) -> (Unknown | str) | Unknown | (value: Unknown) -> dict[Unknown, Any]]:
         """Metadata item name to parser function mapping."""
         ...
-    
-    def parse_section_packages__find(self, section_options): # -> dict[Unknown, Unknown]:
+    def parse_section_packages__find(
+        self, section_options
+    ):  # -> dict[Unknown, Unknown]:
         """Parses `packages.find` configuration file section.
 
         To be used in conjunction with _parse_packages().
@@ -127,41 +123,33 @@ class ConfigOptionsHandler(ConfigHandler):
         :param dict section_options:
         """
         ...
-    
-    def parse_section_entry_points(self, section_options): # -> None:
+    def parse_section_entry_points(self, section_options):  # -> None:
         """Parses `entry_points` configuration file section.
 
         :param dict section_options:
         """
         ...
-    
-    def parse_section_package_data(self, section_options): # -> None:
+    def parse_section_package_data(self, section_options):  # -> None:
         """Parses `package_data` configuration file section.
 
         :param dict section_options:
         """
         ...
-    
-    def parse_section_exclude_package_data(self, section_options): # -> None:
+    def parse_section_exclude_package_data(self, section_options):  # -> None:
         """Parses `exclude_package_data` configuration file section.
 
         :param dict section_options:
         """
         ...
-    
-    def parse_section_extras_require(self, section_options): # -> None:
+    def parse_section_extras_require(self, section_options):  # -> None:
         """Parses `extras_require` configuration file section.
 
         :param dict section_options:
         """
         ...
-    
-    def parse_section_data_files(self, section_options): # -> None:
+    def parse_section_data_files(self, section_options):  # -> None:
         """Parses `data_files` configuration file section.
 
         :param dict section_options:
         """
         ...
-    
-
-

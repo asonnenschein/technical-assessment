@@ -8,6 +8,7 @@ from distutils.errors import DistutilsError
 
 Provides exceptions used by setuptools modules.
 """
+
 class RemovedCommandError(DistutilsError, RuntimeError):
     """Error used for commands that have been removed in setuptools.
 
@@ -16,6 +17,5 @@ class RemovedCommandError(DistutilsError, RuntimeError):
     error is raised if a command exists in ``distutils`` but has been actively
     removed in ``setuptools``.
     """
+
     ...
-
-

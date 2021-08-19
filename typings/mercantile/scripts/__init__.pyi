@@ -10,7 +10,8 @@ import mercantile
 
 """Mercantile command line interface
 """
-def configure_logging(verbosity): # -> None:
+
+def configure_logging(verbosity):  # -> None:
     """Configure logging level
 
     Parameters
@@ -26,11 +27,12 @@ def configure_logging(verbosity): # -> None:
 
 logger = ...
 RS = ...
-def normalize_input(input): # -> list[Unknown]:
+
+def normalize_input(input):  # -> list[Unknown]:
     """Normalize file or string input."""
     ...
 
-def iter_lines(lines): # -> Generator[Unknown, None, None]:
+def iter_lines(lines):  # -> Generator[Unknown, None, None]:
     """Iterate over lines of input, stripping and skipping."""
     ...
 
@@ -39,25 +41,84 @@ def iter_lines(lines): # -> Generator[Unknown, None, None]:
 @click.option("--quiet", "-q", count=True, help="Decrease verbosity.")
 @click.version_option(version=mercantile.__version__, message="%(version)s")
 @click.pass_context
-def cli(ctx, verbose, quiet): # -> None:
+def cli(ctx, verbose, quiet):  # -> None:
     """Execute the main mercantile command"""
     ...
 
 @cli.command(short_help="Print the shapes of tiles as GeoJSON.")
 @click.argument("input", default="-", required=False)
-@click.option("--precision", type=int, default=None, help="Decimal precision of coordinates.")
-@click.option("--indent", default=None, type=int, help="Indentation level for JSON output")
-@click.option("--compact/--no-compact", default=False, help="Use compact separators (',', ':').")
-@click.option("--geographic", "projected", flag_value="geographic", default=True, help="Output in geographic coordinates (the default).")
-@click.option("--mercator", "projected", flag_value="mercator", help="Output in Web Mercator coordinates.")
-@click.option("--seq", is_flag=True, default=False, help="Write a RS-delimited JSON sequence (default is LF).")
-@click.option("--feature", "output_mode", flag_value="feature", default=True, help="Output as sequence of GeoJSON features (the default).")
-@click.option("--bbox", "output_mode", flag_value="bbox", help="Output as sequence of GeoJSON bbox arrays.")
-@click.option("--collect", is_flag=True, default=False, help="Output as a GeoJSON feature collections.")
-@click.option("--extents/--no-extents", default=False, help="Write shape extents as ws-separated strings (default is " "False).")
-@click.option("--buffer", type=float, default=None, help="Shift shape x and y values by a constant number")
+@click.option(
+    "--precision", type=int, default=None, help="Decimal precision of coordinates."
+)
+@click.option(
+    "--indent", default=None, type=int, help="Indentation level for JSON output"
+)
+@click.option(
+    "--compact/--no-compact", default=False, help="Use compact separators (',', ':')."
+)
+@click.option(
+    "--geographic",
+    "projected",
+    flag_value="geographic",
+    default=True,
+    help="Output in geographic coordinates (the default).",
+)
+@click.option(
+    "--mercator",
+    "projected",
+    flag_value="mercator",
+    help="Output in Web Mercator coordinates.",
+)
+@click.option(
+    "--seq",
+    is_flag=True,
+    default=False,
+    help="Write a RS-delimited JSON sequence (default is LF).",
+)
+@click.option(
+    "--feature",
+    "output_mode",
+    flag_value="feature",
+    default=True,
+    help="Output as sequence of GeoJSON features (the default).",
+)
+@click.option(
+    "--bbox",
+    "output_mode",
+    flag_value="bbox",
+    help="Output as sequence of GeoJSON bbox arrays.",
+)
+@click.option(
+    "--collect",
+    is_flag=True,
+    default=False,
+    help="Output as a GeoJSON feature collections.",
+)
+@click.option(
+    "--extents/--no-extents",
+    default=False,
+    help="Write shape extents as ws-separated strings (default is " "False).",
+)
+@click.option(
+    "--buffer",
+    type=float,
+    default=None,
+    help="Shift shape x and y values by a constant number",
+)
 @click.pass_context
-def shapes(ctx, input, precision, indent, compact, projected, seq, output_mode, collect, extents, buffer): # -> None:
+def shapes(
+    ctx,
+    input,
+    precision,
+    indent,
+    compact,
+    projected,
+    seq,
+    output_mode,
+    collect,
+    extents,
+    buffer,
+):  # -> None:
     """Print tiles as GeoJSON feature collections or sequences.
 
     Input may be a compact newline-delimited sequences of JSON or
@@ -73,21 +134,28 @@ def shapes(ctx, input, precision, indent, compact, projected, seq, output_mode, 
     In the latter case, the properties object will be used to update
     the properties object of the output feature.
 
-	Example:
+        Example:
 
-	\b
-	echo "[486, 332, 10]" | mercantile shapes --precision 4 --bbox
-	[-9.1406, 53.1204, -8.7891, 53.3309]
+        \b
+        echo "[486, 332, 10]" | mercantile shapes --precision 4 --bbox
+        [-9.1406, 53.1204, -8.7891, 53.3309]
 
     """
     ...
 
-@cli.command(short_help="Print tiles that overlap or contain a lng/lat point, " "bounding box, or GeoJSON objects.")
-@click.argument("zoom", type=int, default=- 1)
+@cli.command(
+    short_help="Print tiles that overlap or contain a lng/lat point, "
+    "bounding box, or GeoJSON objects."
+)
+@click.argument("zoom", type=int, default=-1)
 @click.argument("input", default="-", required=False)
-@click.option("--seq/--lf", default=False, help="Write a RS-delimited JSON sequence (default is LF).")
+@click.option(
+    "--seq/--lf",
+    default=False,
+    help="Write a RS-delimited JSON sequence (default is LF).",
+)
 @click.pass_context
-def tiles(ctx, zoom, input, seq): # -> None:
+def tiles(ctx, zoom, input, seq):  # -> None:
     """Lists Web Mercator tiles at ZOOM level intersecting
     GeoJSON [west, south, east, north] bounding boxen, features, or
     collections read from stdin. Output is a JSON
@@ -110,11 +178,19 @@ def tiles(ctx, zoom, input, seq): # -> None:
     """
     ...
 
-@cli.command("bounding-tile", short_help="Print the bounding tile of a lng/lat point, " "bounding box, or GeoJSON objects.")
+@cli.command(
+    "bounding-tile",
+    short_help="Print the bounding tile of a lng/lat point, "
+    "bounding box, or GeoJSON objects.",
+)
 @click.argument("input", default="-", required=False)
-@click.option("--seq/--lf", default=False, help="Write a RS-delimited JSON sequence (default is LF).")
+@click.option(
+    "--seq/--lf",
+    default=False,
+    help="Write a RS-delimited JSON sequence (default is LF).",
+)
 @click.pass_context
-def bounding_tile(ctx, input, seq): # -> None:
+def bounding_tile(ctx, input, seq):  # -> None:
     """Print the Web Mercator tile at ZOOM level bounding
     GeoJSON [west, south, east, north] bounding boxes, features, or
     collections read from stdin.
@@ -135,9 +211,14 @@ def bounding_tile(ctx, input, seq): # -> None:
 
 @cli.command(short_help="Print the children of the tile.")
 @click.argument("input", default="-", required=False)
-@click.option("--depth", type=int, default=1, help="Number of zoom levels to traverse (default is 1).")
+@click.option(
+    "--depth",
+    type=int,
+    default=1,
+    help="Number of zoom levels to traverse (default is 1).",
+)
 @click.pass_context
-def children(ctx, input, depth): # -> None:
+def children(ctx, input, depth):  # -> None:
     """Takes [x, y, z] tiles as input and writes children to stdout
     in the same form.
 
@@ -160,9 +241,14 @@ def children(ctx, input, depth): # -> None:
 
 @cli.command(short_help="Print the parent tile.")
 @click.argument("input", default="-", required=False)
-@click.option("--depth", type=int, default=1, help="Number of zoom levels to traverse (default is 1).")
+@click.option(
+    "--depth",
+    type=int,
+    default=1,
+    help="Number of zoom levels to traverse (default is 1).",
+)
 @click.pass_context
-def parent(ctx, input, depth): # -> None:
+def parent(ctx, input, depth):  # -> None:
     """Takes [x, y, z] tiles as input and writes parents to stdout
     in the same form.
 
@@ -183,7 +269,7 @@ def parent(ctx, input, depth): # -> None:
 @cli.command(short_help="Print the neighbors of the tile.")
 @click.argument("input", default="-", required=False)
 @click.pass_context
-def neighbors(ctx, input): # -> None:
+def neighbors(ctx, input):  # -> None:
     """Takes [x, y, z] tiles as input and writes adjacent
     tiles on the same zoom level to stdout in the same form.
 
@@ -213,7 +299,7 @@ def neighbors(ctx, input): # -> None:
 @cli.command(short_help="Convert to/from quadkeys.")
 @click.argument("input", default="-", required=False)
 @click.pass_context
-def quadkey(ctx, input): # -> None:
+def quadkey(ctx, input):  # -> None:
     """Takes [x, y, z] tiles or quadkeys as input and writes
     quadkeys or a [x, y, z] tiles to stdout, respectively.
 
@@ -234,4 +320,3 @@ def quadkey(ctx, input): # -> None:
 
     """
     ...
-

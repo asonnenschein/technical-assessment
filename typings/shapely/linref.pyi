@@ -6,19 +6,11 @@ from shapely.topology import Delegating
 
 """Linear referencing
 """
-class LinearRefBase(Delegating):
-    ...
 
+class LinearRefBase(Delegating): ...
 
 class ProjectOp(LinearRefBase):
-    def __call__(self, this, other):
-        ...
-    
-
+    def __call__(self, this, other): ...
 
 class InterpolateOp(LinearRefBase):
-    def __call__(self, this, distance):
-        ...
-    
-
-
+    def __call__(self, this, distance): ...

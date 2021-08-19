@@ -13,7 +13,8 @@ here we use mappings:
 
     {'proj': 'longlat', 'ellps': 'WGS84', 'datum': 'WGS84', 'no_defs': True}
 """
-def to_string(crs): # -> str:
+
+def to_string(crs):  # -> str:
     """Turn a parameter mapping into a more conventional PROJ.4 string.
 
     Mapping keys are tested against the ``all_proj_keys`` list. Values of
@@ -23,7 +24,7 @@ def to_string(crs): # -> str:
     """
     ...
 
-def from_string(prjs): # -> dict[Unknown, int | float | Unknown | Literal[True]]:
+def from_string(prjs):  # -> dict[Unknown, int | float | Unknown | Literal[True]]:
     """Turn a PROJ.4 string into a mapping of parameters.
 
     Bare parameters like "+no_defs" are given a value of ``True``. All keys
@@ -31,7 +32,7 @@ def from_string(prjs): # -> dict[Unknown, int | float | Unknown | Literal[True]]
     """
     ...
 
-def from_epsg(code): # -> dict[str, Unknown | bool]:
+def from_epsg(code):  # -> dict[str, Unknown | bool]:
     """Given an integer code, returns an EPSG-like mapping.
 
     Note: the input code is not validated against an EPSG database.

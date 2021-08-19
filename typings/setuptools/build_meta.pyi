@@ -32,30 +32,24 @@ bug reports or API stability):
 
 Again, this is not a formal definition! Just a "taste" of the module.
 """
-class SetupRequirementsError(BaseException):
-    def __init__(self, specifiers) -> None:
-        ...
-    
 
+class SetupRequirementsError(BaseException):
+    def __init__(self, specifiers) -> None: ...
 
 class Distribution(setuptools.dist.Distribution):
-    def fetch_build_eggs(self, specifiers): # -> NoReturn:
-        ...
-    
+    def fetch_build_eggs(self, specifiers): ...
     @classmethod
     @contextlib.contextmanager
-    def patch(cls): # -> Generator[None, None, None]:
+    def patch(cls):  # -> Generator[None, None, None]:
         """
         Replace
         distutils.dist.Distribution with this class
         for the duration of this context.
         """
         ...
-    
-
 
 @contextlib.contextmanager
-def no_install_setup_requires(): # -> Generator[None, None, None]:
+def no_install_setup_requires():  # -> Generator[None, None, None]:
     """Temporarily disable installing setup_requires
 
     Under PEP 517, the backend reports build dependencies to the frontend,
@@ -65,25 +59,16 @@ def no_install_setup_requires(): # -> Generator[None, None, None]:
     ...
 
 class _BuildMetaBackend:
-    def run_setup(self, setup_script=...): # -> None:
-        ...
-    
-    def get_requires_for_build_wheel(self, config_settings=...): # -> list[str]:
-        ...
-    
-    def get_requires_for_build_sdist(self, config_settings=...): # -> list[Unknown]:
-        ...
-    
-    def prepare_metadata_for_build_wheel(self, metadata_directory, config_settings=...): # -> str:
-        ...
-    
-    def build_wheel(self, wheel_directory, config_settings=..., metadata_directory=...): # -> str:
-        ...
-    
-    def build_sdist(self, sdist_directory, config_settings=...): # -> str:
-        ...
-    
-
+    def run_setup(self, setup_script=...): ...
+    def get_requires_for_build_wheel(self, config_settings=...): ...
+    def get_requires_for_build_sdist(self, config_settings=...): ...
+    def prepare_metadata_for_build_wheel(
+        self, metadata_directory, config_settings=...
+    ): ...
+    def build_wheel(
+        self, wheel_directory, config_settings=..., metadata_directory=...
+    ): ...
+    def build_sdist(self, sdist_directory, config_settings=...): ...
 
 class _BuildMetaLegacyBackend(_BuildMetaBackend):
     """Compatibility backend for setuptools
@@ -96,10 +81,8 @@ class _BuildMetaLegacyBackend(_BuildMetaBackend):
     packaging mechanism,
     and will eventually be removed.
     """
-    def run_setup(self, setup_script=...): # -> None:
-        ...
-    
 
+    def run_setup(self, setup_script=...): ...
 
 _BACKEND = ...
 get_requires_for_build_wheel = ...

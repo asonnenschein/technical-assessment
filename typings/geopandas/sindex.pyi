@@ -24,7 +24,6 @@ class BaseSpatialIndex:
 'overlaps', None, 'covers', 'contains_properly'}
         """
         ...
-    
     def query(self, geometry, predicate=..., sort=...):
         """Return the index of all geometries in the tree with extents that
         intersect the envelope of the input geometry.
@@ -77,7 +76,6 @@ class BaseSpatialIndex:
         array([2])
         """
         ...
-    
     def query_bulk(self, geometry, predicate=..., sort=...):
         """
         Returns all combinations of each input geometry and geometries in
@@ -148,7 +146,6 @@ class BaseSpatialIndex:
                 [3]])
         """
         ...
-    
     def intersection(self, coordinates):
         """Compatibility wrapper for rtree.index.Index.intersection,
         use ``query`` intead.
@@ -186,7 +183,6 @@ class BaseSpatialIndex:
 
         """
         ...
-    
     @property
     def size(self):
         """Size of the spatial index
@@ -214,7 +210,6 @@ class BaseSpatialIndex:
         10
         """
         ...
-    
     @property
     def is_empty(self):
         """Check if the spatial index is empty
@@ -244,10 +239,8 @@ class BaseSpatialIndex:
         True
         """
         ...
-    
 
-
-def doc(docstring): # -> (decorated: Unknown) -> Unknown:
+def doc(docstring):  # -> (decorated: Unknown) -> Unknown:
     """
     A decorator take docstring from passed object and it to decorated one.
     """
@@ -256,25 +249,16 @@ def doc(docstring): # -> (decorated: Unknown) -> Unknown:
 if compat.HAS_RTREE:
     class SpatialIndex(rtree.index.Index, BaseSpatialIndex):
         """Original rtree wrapper, kept for backwards compatibility."""
-        def __init__(self, *args) -> None:
-            ...
-        
+
+        def __init__(self, *args) -> None: ...
         @doc(BaseSpatialIndex.intersection)
-        def intersection(self, coordinates, *args, **kwargs): # -> Generator[Item | Any | None, None, None] | Generator[Unknown, None, None]:
-            ...
-        
+        def intersection(self, coordinates, *args, **kwargs): ...
         @doc(BaseSpatialIndex.size)
         @property
-        def size(self): # -> int:
-            ...
-        
+        def size(self): ...
         @doc(BaseSpatialIndex.is_empty)
         @property
-        def is_empty(self): # -> bool:
-            ...
-        
-    
-    
+        def is_empty(self): ...
     class RTreeIndex(rtree.index.Index):
         """A simple wrapper around rtree's RTree Index
 
@@ -283,41 +267,25 @@ if compat.HAS_RTREE:
         geometry : np.array of Shapely geometries
             Geometries from which to build the spatial index.
         """
-        def __init__(self, geometry) -> None:
-            ...
-        
+
+        def __init__(self, geometry) -> None: ...
         @doc(BaseSpatialIndex.valid_query_predicates)
         @property
-        def valid_query_predicates(self): # -> set[str | None]:
-            ...
-        
+        def valid_query_predicates(self): ...
         @doc(BaseSpatialIndex.query)
-        def query(self, geometry, predicate=..., sort=...): # -> ndarray[Unknown, Unknown]:
-            ...
-        
+        def query(self, geometry, predicate=..., sort=...): ...
         @doc(BaseSpatialIndex.query_bulk)
-        def query_bulk(self, geometry, predicate=..., sort=...): # -> ndarray[Unknown, Unknown]:
-            ...
-        
+        def query_bulk(self, geometry, predicate=..., sort=...): ...
         @doc(BaseSpatialIndex.intersection)
-        def intersection(self, coordinates): # -> Generator[Item | Any | None, None, None] | Generator[Unknown, None, None]:
-            ...
-        
+        def intersection(self, coordinates): ...
         @doc(BaseSpatialIndex.size)
         @property
-        def size(self): # -> int:
-            ...
-        
+        def size(self): ...
         @doc(BaseSpatialIndex.is_empty)
         @property
-        def is_empty(self): # -> bool:
-            ...
-        
-        def __len__(self): # -> int:
-            ...
-        
-    
-    
+        def is_empty(self): ...
+        def __len__(self): ...
+
 if compat.HAS_PYGEOS:
     class PyGEOSSTRTreeIndex(pygeos.STRtree):
         """A simple wrapper around pygeos's STRTree.
@@ -328,9 +296,8 @@ if compat.HAS_PYGEOS:
         geometry : np.array of PyGEOS geometries
             Geometries from which to build the spatial index.
         """
-        def __init__(self, geometry) -> None:
-            ...
-        
+
+        def __init__(self, geometry) -> None: ...
         @property
         def valid_query_predicates(self):
             """Returns valid predicates for the used spatial index.
@@ -349,28 +316,15 @@ if compat.HAS_PYGEOS:
 'touches', 'overlaps', 'contains_properly', 'covers'}
             """
             ...
-        
         @doc(BaseSpatialIndex.query)
-        def query(self, geometry, predicate=..., sort=...): # -> ndarray[Unknown, Unknown]:
-            ...
-        
+        def query(self, geometry, predicate=..., sort=...): ...
         @doc(BaseSpatialIndex.query_bulk)
-        def query_bulk(self, geometry, predicate=..., sort=...): # -> ndarray[Unknown, Unknown]:
-            ...
-        
+        def query_bulk(self, geometry, predicate=..., sort=...): ...
         @doc(BaseSpatialIndex.intersection)
-        def intersection(self, coordinates):
-            ...
-        
+        def intersection(self, coordinates): ...
         @doc(BaseSpatialIndex.size)
         @property
-        def size(self): # -> int:
-            ...
-        
+        def size(self): ...
         @doc(BaseSpatialIndex.is_empty)
         @property
-        def is_empty(self): # -> bool:
-            ...
-        
-    
-    
+        def is_empty(self): ...

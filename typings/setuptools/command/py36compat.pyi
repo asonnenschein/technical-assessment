@@ -12,7 +12,8 @@ class sdist_add_defaults:
     Do not edit the code in this class except to update functionality
     as implemented in distutils. Instead, override in the subclass.
     """
-    def add_defaults(self): # -> None:
+
+    def add_defaults(self):  # -> None:
         """Add all the default files to self.filelist:
           - README or README.txt
           - setup.py
@@ -27,11 +28,6 @@ class sdist_add_defaults:
         else is optional.
         """
         ...
-    
 
-
-if hasattr(sdist.sdist, '_add_defaults_standards'):
-    class sdist_add_defaults:
-        ...
-    
-    
+if hasattr(sdist.sdist, "_add_defaults_standards"):
+    class sdist_add_defaults: ...

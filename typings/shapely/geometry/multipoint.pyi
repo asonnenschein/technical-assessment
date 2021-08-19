@@ -8,8 +8,8 @@ from shapely.geometry.proxy import CachingGeometryProxy
 
 """Collections of points and related utilities
 """
-if sys.version_info[0] < 3:
-    ...
+if sys.version_info[0] < 3: ...
+
 class MultiPoint(BaseMultipartGeometry):
     """A collection of one or more points
 
@@ -20,6 +20,7 @@ class MultiPoint(BaseMultipartGeometry):
     geoms : sequence
         A sequence of Points
     """
+
     def __init__(self, points=...) -> None:
         """
         Parameters
@@ -40,15 +41,10 @@ class MultiPoint(BaseMultipartGeometry):
           True
         """
         ...
-    
-    def shape_factory(self, *args):
-        ...
-    
+    def shape_factory(self, *args): ...
     @property
-    def __geo_interface__(self): # -> dict[str, str | tuple[Unknown, ...]]:
-        ...
-    
-    def svg(self, scale_factor=..., fill_color=...): # -> str:
+    def __geo_interface__(self): ...
+    def svg(self, scale_factor=..., fill_color=...):  # -> str:
         """Returns a group of SVG circle elements for the MultiPoint geometry.
 
         Parameters
@@ -60,37 +56,26 @@ class MultiPoint(BaseMultipartGeometry):
             geometry is valid, and "#ff3333" if invalid.
         """
         ...
-    
     @property
     @exceptNull
-    def ctypes(self): # -> Array[c_double]:
-        ...
-    
+    def ctypes(self): ...
     @exceptNull
-    def array_interface(self): # -> dict[str, int | str | Unknown]:
+    def array_interface(self):  # -> dict[str, int | str | Unknown]:
         """Provide the Numpy array protocol."""
         ...
-    
     __array_interface__ = ...
-
 
 class MultiPointAdapter(CachingGeometryProxy, MultiPoint):
     context = ...
     _other_owned = ...
-    def __init__(self, context) -> None:
-        ...
-    
+    def __init__(self, context) -> None: ...
     @property
-    def __array_interface__(self): # -> dict[str, int | str | Unknown]:
+    def __array_interface__(self):  # -> dict[str, int | str | Unknown]:
         """Provide the Numpy array protocol."""
         ...
-    
 
-
-def asMultiPoint(context): # -> MultiPointAdapter:
+def asMultiPoint(context):  # -> MultiPointAdapter:
     """Adapt a sequence of objects to the MultiPoint interface"""
     ...
 
-def geos_multipoint_from_py(ob): # -> tuple[Any | Unknown, Unknown] | tuple[Any, Unknown | Literal[2, 3]]:
-    ...
-
+def geos_multipoint_from_py(ob): ...

@@ -72,14 +72,26 @@ feature writing to a "points.shp" file.
 Because Fiona collections are context managers, they are closed and (in
 writing modes) flush contents to disk when their ``with`` blocks end.
 """
-if sys.platform == "win32":
-    ...
+if sys.platform == "win32": ...
 __version__ = ...
 __gdal_version__ = ...
 gdal_version = ...
 log = ...
+
 @ensure_env_with_credentials
-def open(fp, mode=..., driver=..., schema=..., crs=..., encoding=..., layer=..., vfs=..., enabled_drivers=..., crs_wkt=..., **kwargs): # -> _GeneratorContextManager[Collection | None] | Collection:
+def open(
+    fp,
+    mode=...,
+    driver=...,
+    schema=...,
+    crs=...,
+    encoding=...,
+    layer=...,
+    vfs=...,
+    enabled_drivers=...,
+    crs_wkt=...,
+    **kwargs
+):  # -> _GeneratorContextManager[Collection | None] | Collection:
     """Open a collection for read, append, or write
 
     In write mode, a driver name such as "ESRI Shapefile" or "GPX" (see
@@ -165,7 +177,8 @@ def open(fp, mode=..., driver=..., schema=..., crs=..., encoding=..., layer=...,
     ...
 
 collection = ...
-def remove(path_or_collection, driver=..., layer=...): # -> None:
+
+def remove(path_or_collection, driver=..., layer=...):  # -> None:
     """Deletes an OGR data source
 
     The required ``path`` argument may be an absolute or relative file path.
@@ -202,7 +215,7 @@ def listlayers(fp, vfs=...):
     """
     ...
 
-def prop_width(val): # -> int | None:
+def prop_width(val):  # -> int | None:
     """Returns the width of a str type property.
 
     Undefined for non-str properties. Example:
@@ -226,7 +239,7 @@ def prop_type(text):
     """
     ...
 
-def drivers(*args, **kwargs): # -> Env:
+def drivers(*args, **kwargs):  # -> Env:
     """Returns a context manager with registered drivers.
 
     DEPRECATED
@@ -238,4 +251,3 @@ def bounds(ob):
 
     The ``ob`` may be a feature record or geometry."""
     ...
-

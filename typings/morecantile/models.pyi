@@ -12,30 +12,29 @@ NumType = Union[float, int]
 BoundsType = Tuple[NumType, NumType]
 LL_EPSILON = ...
 WGS84_CRS = ...
+
 class CRSType(CRS, AnyHttpUrl):
     """
     A geographic or projected coordinate reference system.
     """
+
     @classmethod
-    def __get_validators__(cls): # -> Generator[(value: CRS | AnyHttpUrl) -> CRS, None, None]:
+    def __get_validators__(
+        cls,
+    ):  # -> Generator[(value: CRS | AnyHttpUrl) -> CRS, None, None]:
         """validator for the type."""
         ...
-    
     @classmethod
-    def validate(cls, value: Union[CRS, AnyHttpUrl]): # -> CRS:
+    def validate(cls, value: Union[CRS, AnyHttpUrl]):  # -> CRS:
         """Validate CRS."""
         ...
-    
     @classmethod
-    def __modify_schema__(cls, field_schema): # -> None:
+    def __modify_schema__(cls, field_schema):  # -> None:
         """Update default schema."""
         ...
-    
-    def __repr__(self): # -> str:
+    def __repr__(self):  # -> str:
         """Type representation."""
         ...
-    
-
 
 def CRS_to_uri(crs: CRS) -> str:
     """Convert CRS to URI."""
@@ -47,20 +46,20 @@ def crs_axis_inverted(crs: CRS) -> bool:
 
 class TMSBoundingBox(BaseModel):
     """Bounding box"""
+
     type: str = ...
     crs: CRSType
     lowerCorner: BoundsType
     upperCorner: BoundsType
     class Config:
         """Configure TMSBoundingBox."""
+
         arbitrary_types_allowed = ...
         json_encoders = ...
-    
-    
-
 
 class TileMatrix(BaseModel):
     """Tile matrix"""
+
     type: str = ...
     title: Optional[str]
     abstract: Optional[str]
@@ -74,13 +73,12 @@ class TileMatrix(BaseModel):
     matrixHeight: int
     class Config:
         """Forbid additional items like variableMatrixWidth."""
-        extra = ...
-    
-    
 
+        extra = ...
 
 class TileMatrixSet(BaseModel):
     """Tile matrix set"""
+
     type: str = ...
     title: str
     abstract: Optional[str]
@@ -92,45 +90,49 @@ class TileMatrixSet(BaseModel):
     tileMatrix: List[TileMatrix]
     class Config:
         """Configure TileMatrixSet."""
+
         arbitrary_types_allowed = ...
         json_encoders = ...
-    
-    
     @validator("tileMatrix")
-    def sort_tile_matrices(cls, v): # -> List[Unknown]:
+    def sort_tile_matrices(cls, v):  # -> List[Unknown]:
         """Sort matrices by identifier"""
         ...
-    
-    def __iter__(self): # -> Generator[TileMatrix, None, None]:
+    def __iter__(self):  # -> Generator[TileMatrix, None, None]:
         """Iterate over matrices"""
         ...
-    
-    def __repr__(self): # -> str:
+    def __repr__(self):  # -> str:
         """Simplify default pydantic model repr."""
         ...
-    
     @property
     def crs(self) -> CRS:
         """Fetch CRS from epsg"""
         ...
-    
     @property
     def minzoom(self) -> int:
         """TileMatrixSet minimum TileMatrix identifier"""
         ...
-    
     @property
     def maxzoom(self) -> int:
         """TileMatrixSet maximum TileMatrix identifier"""
         ...
-    
     @classmethod
-    def load(cls, name: str): # -> TileMatrixSet:
+    def load(cls, name: str):  # -> TileMatrixSet:
         """Load default TileMatrixSet."""
         ...
-    
     @classmethod
-    def custom(cls, extent: List[float], crs: CRS, tile_width: int = ..., tile_height: int = ..., matrix_scale: List = ..., extent_crs: Optional[CRS] = ..., minzoom: int = ..., maxzoom: int = ..., title: str = ..., identifier: str = ...): # -> TileMatrixSet:
+    def custom(
+        cls,
+        extent: List[float],
+        crs: CRS,
+        tile_width: int = ...,
+        tile_height: int = ...,
+        matrix_scale: List = ...,
+        extent_crs: Optional[CRS] = ...,
+        minzoom: int = ...,
+        maxzoom: int = ...,
+        title: str = ...,
+        identifier: str = ...,
+    ):  # -> TileMatrixSet:
         """
         Construct a custom TileMatrixSet.
 
@@ -166,12 +168,12 @@ class TileMatrixSet(BaseModel):
 
         """
         ...
-    
     def matrix(self, zoom: int) -> TileMatrix:
         """Return the TileMatrix for a specific zoom."""
         ...
-    
-    def zoom_for_res(self, res: float, max_z: Optional[int] = ..., zoom_level_strategy: str = ...) -> int:
+    def zoom_for_res(
+        self, res: float, max_z: Optional[int] = ..., zoom_level_strategy: str = ...
+    ) -> int:
         """Get TMS zoom level corresponding to a specific resolution.
 
         Args:
@@ -191,15 +193,12 @@ class TileMatrixSet(BaseModel):
 
         """
         ...
-    
     def lnglat(self, x: float, y: float, truncate=...) -> Coords:
         """Transform point(x,y) to longitude and latitude."""
         ...
-    
     def xy(self, lng: float, lat: float, truncate=...) -> Coords:
         """Transform longitude and latitude coordinates to TMS CRS."""
         ...
-    
     def tile(self, lng: float, lat: float, zoom: int, truncate=...) -> Tile:
         """
         Get the tile containing a longitude and latitude.
@@ -219,7 +218,6 @@ class TileMatrixSet(BaseModel):
 
         """
         ...
-    
     def xy_bounds(self, *tile: Tile) -> BoundingBox:
         """
         Return the bounding box of the (x, y, z) tile in input projection.
@@ -234,7 +232,6 @@ class TileMatrixSet(BaseModel):
 
         """
         ...
-    
     def ul(self, *tile: Tile) -> Coords:
         """
         Return the upper left coordinate of the (x, y, z) tile in Lat Lon.
@@ -249,7 +246,6 @@ class TileMatrixSet(BaseModel):
 
         """
         ...
-    
     def bounds(self, *tile: Tile) -> BoundingBox:
         """
         Return the bounding box of the (x, y, z) tile in LatLong.
@@ -264,22 +260,26 @@ class TileMatrixSet(BaseModel):
 
         """
         ...
-    
     @property
-    def xy_bbox(self): # -> BoundingBox:
+    def xy_bbox(self):  # -> BoundingBox:
         """Return TMS bounding box in TileMatrixSet's CRS."""
         ...
-    
     @property
-    def bbox(self): # -> BoundingBox:
+    def bbox(self):  # -> BoundingBox:
         """Return TMS bounding box in WGS84."""
         ...
-    
     def intersect_tms(self, bbox: BoundingBox) -> bool:
         """Check if a bounds intersects with the TMS bounds."""
         ...
-    
-    def tiles(self, west: float, south: float, east: float, north: float, zooms: Sequence[int], truncate: bool = ...) -> Iterator[Tile]:
+    def tiles(
+        self,
+        west: float,
+        south: float,
+        east: float,
+        north: float,
+        zooms: Sequence[int],
+        truncate: bool = ...,
+    ) -> Iterator[Tile]:
         """
         Get the tiles overlapped by a geographic bounding box
 
@@ -305,8 +305,15 @@ class TileMatrixSet(BaseModel):
 
         """
         ...
-    
-    def feature(self, tile: Tile, fid: Optional[str] = ..., props: Dict = ..., buffer: Optional[NumType] = ..., precision: Optional[int] = ..., projected: bool = ...) -> Dict:
+    def feature(
+        self,
+        tile: Tile,
+        fid: Optional[str] = ...,
+        props: Dict = ...,
+        buffer: Optional[NumType] = ...,
+        precision: Optional[int] = ...,
+        projected: bool = ...,
+    ) -> Dict:
         """
         Get the GeoJSON feature corresponding to a tile.
 
@@ -334,6 +341,3 @@ class TileMatrixSet(BaseModel):
 
         """
         ...
-    
-
-

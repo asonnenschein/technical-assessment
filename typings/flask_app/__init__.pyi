@@ -6,6 +6,4 @@ from flask import Flask
 from rio_tiler.io import COGReader
 from flask_app.imagery.views import imagery
 
-def create_app() -> Flask:
-    ...
-
+def create_app() -> Flask: ...

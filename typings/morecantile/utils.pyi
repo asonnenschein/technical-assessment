@@ -7,6 +7,7 @@ from rasterio.crs import CRS
 from .commons import BoundingBox, Coords
 
 """morecantile utils."""
+
 def meters_per_unit(crs: CRS) -> float:
     """
     Coefficient to convert the coordinate reference system (CRS)
@@ -36,4 +37,3 @@ def bbox_to_feature(west: float, south: float, east: float, north: float) -> Dic
 def point_in_bbox(point: Coords, bbox: BoundingBox, precision: int = ...) -> bool:
     """Check if a point is in a bounding box."""
     ...
-

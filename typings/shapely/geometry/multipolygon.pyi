@@ -8,19 +8,20 @@ from shapely.geometry.proxy import CachingGeometryProxy
 
 """Collections of polygons and related utilities
 """
-if sys.version_info[0] < 3:
-    ...
+if sys.version_info[0] < 3: ...
+
 class MultiPolygon(BaseMultipartGeometry):
     """A collection of one or more polygons
-    
+
     If component polygons overlap the collection is `invalid` and some
     operations on it may fail.
-    
+
     Attributes
     ----------
     geoms : sequence
         A sequence of `Polygon` instances
     """
+
     def __init__(self, polygons=..., context_type=...) -> None:
         """
         Parameters
@@ -36,7 +37,7 @@ class MultiPolygon(BaseMultipartGeometry):
 
           >>> ob = MultiPolygon( [
           ...     (
-          ...     ((0.0, 0.0), (0.0, 1.0), (1.0, 1.0), (1.0, 0.0)), 
+          ...     ((0.0, 0.0), (0.0, 1.0), (1.0, 1.0), (1.0, 0.0)),
           ...     [((0.1,0.1), (0.1,0.2), (0.2,0.2), (0.2,0.1))]
           ...     )
           ... ] )
@@ -46,15 +47,10 @@ class MultiPolygon(BaseMultipartGeometry):
           True
         """
         ...
-    
-    def shape_factory(self, *args):
-        ...
-    
+    def shape_factory(self, *args): ...
     @property
-    def __geo_interface__(self): # -> dict[str, str | list[Unknown]]:
-        ...
-    
-    def svg(self, scale_factor=..., fill_color=...): # -> str:
+    def __geo_interface__(self): ...
+    def svg(self, scale_factor=..., fill_color=...):  # -> str:
         """Returns group of SVG path elements for the MultiPolygon geometry.
 
         Parameters
@@ -66,26 +62,23 @@ class MultiPolygon(BaseMultipartGeometry):
             geometry is valid, and "#ff3333" if invalid.
         """
         ...
-    
-
 
 class MultiPolygonAdapter(CachingGeometryProxy, MultiPolygon):
     context = ...
     _other_owned = ...
-    def __init__(self, context, context_type=...) -> None:
-        ...
-    
+    def __init__(self, context, context_type=...) -> None: ...
 
-
-def asMultiPolygon(context): # -> MultiPolygonAdapter:
+def asMultiPolygon(context):  # -> MultiPolygonAdapter:
     """Adapts a sequence of objects to the MultiPolygon interface"""
     ...
 
-def geos_multipolygon_from_py(ob): # -> tuple[Any, Literal[2, 3]]:
+def geos_multipolygon_from_py(ob):  # -> tuple[Any, Literal[2, 3]]:
     """ob must provide Python geo interface coordinates."""
     ...
 
-def geos_multipolygon_from_polygons(arg): # -> tuple[Any | Unknown, Unknown | Literal[2, 3]] | tuple[Any, Literal[3]] | tuple[Any, Any | Literal[2, 3]]:
+def geos_multipolygon_from_polygons(
+    arg,
+):  # -> tuple[Any | Unknown, Unknown | Literal[2, 3]] | tuple[Any, Literal[3]] | tuple[Any, Any | Literal[2, 3]]:
     """Creates a GEOS multipolygon from a sequence of polygon-like objects.
 
     Parameters
@@ -100,5 +93,4 @@ def geos_multipolygon_from_polygons(arg): # -> tuple[Any | Unknown, Unknown | Li
     """
     ...
 
-if __name__ == "__main__":
-    ...
+if __name__ == "__main__": ...

@@ -13,37 +13,23 @@ operations are performed in the x-y plane. Thus, geometries with
 different z values may intersect or be equal.
 """
 log = ...
-if sys.version_info[0] < 3:
-    ...
+if sys.version_info[0] < 3: ...
 else:
     integer_types = ...
 GEOMETRY_TYPES = ...
-def dump_coords(geom): # -> Any | list[Unknown]:
+
+def dump_coords(geom):  # -> Any | list[Unknown]:
     """Dump coordinates of a geometry in the same order as data packing"""
     ...
 
-def geometry_type_name(g): # -> str:
-    ...
-
-def geom_factory(g, parent=...): # -> BaseGeometry:
-    ...
-
-def geom_from_wkt(data): # -> BaseGeometry:
-    ...
-
-def geom_to_wkt(ob): # -> Any:
-    ...
-
-def deserialize_wkb(data): # -> Any:
-    ...
-
-def geom_from_wkb(data): # -> BaseGeometry:
-    ...
-
-def geom_to_wkb(ob): # -> Any:
-    ...
-
-def geos_geom_from_py(ob, create_func=...): # -> tuple[Any | Unknown, Unknown]:
+def geometry_type_name(g): ...
+def geom_factory(g, parent=...): ...
+def geom_from_wkt(data): ...
+def geom_to_wkt(ob): ...
+def deserialize_wkb(data): ...
+def geom_from_wkb(data): ...
+def geom_to_wkb(ob): ...
+def geos_geom_from_py(ob, create_func=...):  # -> tuple[Any | Unknown, Unknown]:
     """Helper function for geos_*_from_py functions in each geom type.
 
     If a create_func is specified the coodinate sequence is cloned and a new
@@ -53,7 +39,7 @@ def geos_geom_from_py(ob, create_func=...): # -> tuple[Any | Unknown, Unknown]:
     """
     ...
 
-def exceptNull(func): # -> (*args: Unknown, **kwargs: Unknown) -> Unknown:
+def exceptNull(func):  # -> (*args: Unknown, **kwargs: Unknown) -> Unknown:
     """Decorator which helps avoid GEOS operations on null pointers."""
     ...
 
@@ -62,19 +48,19 @@ class CAP_STYLE:
     flat = ...
     square = ...
 
-
 class JOIN_STYLE:
     round = ...
     mitre = ...
     bevel = ...
 
-
 EMPTY = ...
+
 class BaseGeometry:
     """
     Provides GEOS spatial predicates and topological operations.
 
     """
+
     __geom__ = ...
     __p__ = ...
     _ctypes_data = ...
@@ -84,133 +70,83 @@ class BaseGeometry:
     _is_empty = ...
     impl = ...
     _lgeos = ...
-    def empty(self, val=...): # -> None:
-        ...
-    
-    def __bool__(self): # -> bool:
-        ...
-    
-    def __nonzero__(self): # -> bool:
-        ...
-    
-    def __del__(self): # -> None:
-        ...
-    
-    def __str__(self) -> str:
-        ...
-    
-    def __reduce__(self): # -> tuple[Type[BaseGeometry], tuple[()], bytes]:
-        ...
-    
-    def __setstate__(self, state): # -> None:
-        ...
-    
-    def __and__(self, other): # -> BaseGeometry:
-        ...
-    
-    def __or__(self, other): # -> BaseGeometry:
-        ...
-    
-    def __sub__(self, other): # -> BaseGeometry:
-        ...
-    
-    def __xor__(self, other): # -> BaseGeometry:
-        ...
-    
-    def __eq__(self, other) -> bool:
-        ...
-    
-    def __ne__(self, other) -> bool:
-        ...
-    
+    def empty(self, val=...): ...
+    def __bool__(self): ...
+    def __nonzero__(self): ...
+    def __del__(self): ...
+    def __str__(self) -> str: ...
+    def __reduce__(self): ...
+    def __setstate__(self, state): ...
+    def __and__(self, other): ...
+    def __or__(self, other): ...
+    def __sub__(self, other): ...
+    def __xor__(self, other): ...
+    def __eq__(self, other) -> bool: ...
+    def __ne__(self, other) -> bool: ...
     __hash__ = ...
     @property
     def ctypes(self):
         """Return ctypes buffer"""
         ...
-    
     @property
-    def array_interface_base(self): # -> dict[str, int | str | Unknown]:
-        ...
-    
+    def array_interface_base(self): ...
     @property
     def __array_interface__(self):
         """Provide the Numpy array protocol."""
         ...
-    
     coords = ...
     @property
     def xy(self):
         """Separate arrays of X and Y coordinate values"""
         ...
-    
     @property
     def __geo_interface__(self):
         """Dictionary representation of the geometry"""
         ...
-    
-    def geometryType(self): # -> str:
-        ...
-    
+    def geometryType(self): ...
     @property
-    def type(self): # -> str:
-        ...
-    
-    def to_wkb(self): # -> Any:
-        ...
-    
-    def to_wkt(self): # -> Any:
-        ...
-    
+    def type(self): ...
+    def to_wkb(self): ...
+    def to_wkt(self): ...
     @property
-    def wkt(self): # -> str:
+    def wkt(self):  # -> str:
         """WKT representation of the geometry"""
         ...
-    
     @property
-    def wkb(self): # -> bytes:
+    def wkb(self):  # -> bytes:
         """WKB representation of the geometry"""
         ...
-    
     @property
-    def wkb_hex(self): # -> str:
+    def wkb_hex(self):  # -> str:
         """WKB hex representation of the geometry"""
         ...
-    
     def svg(self, scale_factor=..., **kwargs):
         """Raises NotImplementedError"""
         ...
-    
     @property
-    def geom_type(self): # -> str:
+    def geom_type(self):  # -> str:
         """Name of the geometry's type, such as 'Point'"""
         ...
-    
     @property
     def area(self):
         """Unitless area of the geometry (float)"""
         ...
-    
     def distance(self, other):
         """Unitless distance to other geometry (float)"""
         ...
-    
     def hausdorff_distance(self, other):
         """Unitless hausdorff distance to other geometry (float)"""
         ...
-    
     @property
     def length(self):
         """Unitless length of the geometry (float)"""
         ...
-    
     @property
     def minimum_clearance(self):
         """Unitless distance by which a node could be moved to produce an invalid geometry (float)"""
         ...
-    
     @property
-    def boundary(self): # -> BaseGeometry:
+    def boundary(self):  # -> BaseGeometry:
         """Returns a lower dimension geometry that bounds the object
 
         The boundary of a polygon is a line, the boundary of a line is a
@@ -218,24 +154,20 @@ class BaseGeometry:
         collection.
         """
         ...
-    
     @property
-    def bounds(self): # -> tuple[()]:
+    def bounds(self):  # -> tuple[()]:
         """Returns minimum bounding region (minx, miny, maxx, maxy)"""
         ...
-    
     @property
-    def centroid(self): # -> BaseGeometry:
+    def centroid(self):  # -> BaseGeometry:
         """Returns the geometric center of the object"""
         ...
-    
     @delegated
-    def representative_point(self): # -> BaseGeometry:
+    def representative_point(self):  # -> BaseGeometry:
         """Returns a point guaranteed to be within the object, cheaply."""
         ...
-    
     @property
-    def convex_hull(self): # -> BaseGeometry:
+    def convex_hull(self):  # -> BaseGeometry:
         """Imagine an elastic band stretched around the geometry: that's a
         convex hull, more or less
 
@@ -243,22 +175,28 @@ class BaseGeometry:
         triangular polygon.
         """
         ...
-    
     @property
-    def envelope(self): # -> BaseGeometry:
+    def envelope(self):  # -> BaseGeometry:
         """A figure that envelopes the geometry"""
         ...
-    
     @property
-    def minimum_rotated_rectangle(self): # -> BaseGeometry:
+    def minimum_rotated_rectangle(self):  # -> BaseGeometry:
         """Returns the general minimum bounding rectangle of
         the geometry. Can possibly be rotated. If the convex hull
         of the object is a degenerate (line or point) this same degenerate
         is returned.
         """
         ...
-    
-    def buffer(self, distance, resolution=..., quadsegs=..., cap_style=..., join_style=..., mitre_limit=..., single_sided=...): # -> BaseGeometry:
+    def buffer(
+        self,
+        distance,
+        resolution=...,
+        quadsegs=...,
+        cap_style=...,
+        join_style=...,
+        mitre_limit=...,
+        single_sided=...,
+    ):  # -> BaseGeometry:
         """Get a geometry that represents all points within a distance
         of this geometry.
 
@@ -330,9 +268,8 @@ class BaseGeometry:
 
         """
         ...
-    
     @delegated
-    def simplify(self, tolerance, preserve_topology=...): # -> BaseGeometry:
+    def simplify(self, tolerance, preserve_topology=...):  # -> BaseGeometry:
         """Returns a simplified geometry produced by the Douglas-Peucker
         algorithm
 
@@ -342,105 +279,84 @@ class BaseGeometry:
         otherwise invalid geometries.
         """
         ...
-    
-    def difference(self, other): # -> BaseGeometry:
+    def difference(self, other):  # -> BaseGeometry:
         """Returns the difference of the geometries"""
         ...
-    
-    def intersection(self, other): # -> BaseGeometry:
+    def intersection(self, other):  # -> BaseGeometry:
         """Returns the intersection of the geometries"""
         ...
-    
-    def symmetric_difference(self, other): # -> BaseGeometry:
+    def symmetric_difference(self, other):  # -> BaseGeometry:
         """Returns the symmetric difference of the geometries
         (Shapely geometry)"""
         ...
-    
-    def union(self, other): # -> BaseGeometry:
+    def union(self, other):  # -> BaseGeometry:
         """Returns the union of the geometries (Shapely geometry)"""
         ...
-    
     @property
-    def has_z(self): # -> bool:
+    def has_z(self):  # -> bool:
         """True if the geometry's coordinate sequence(s) have z values (are
         3-dimensional)"""
         ...
-    
     @property
-    def is_empty(self): # -> bool:
+    def is_empty(self):  # -> bool:
         """True if the set of points in this geometry is empty, else False"""
         ...
-    
     @property
-    def is_ring(self): # -> bool:
+    def is_ring(self):  # -> bool:
         """True if the geometry is a closed ring, else False"""
         ...
-    
     @property
-    def is_closed(self): # -> bool | Any:
+    def is_closed(self):  # -> bool | Any:
         """True if the geometry is closed, else False
 
         Applicable only to 1-D geometries."""
         ...
-    
     @property
-    def is_simple(self): # -> bool:
+    def is_simple(self):  # -> bool:
         """True if the geometry is simple, meaning that any self-intersections
         are only at boundary points, else False"""
         ...
-    
     @property
-    def is_valid(self): # -> bool:
+    def is_valid(self):  # -> bool:
         """True if the geometry is valid (definition depends on sub-class),
         else False"""
         ...
-    
     def relate(self, other):
         """Returns the DE-9IM intersection matrix for the two geometries
         (string)"""
         ...
-    
-    def covers(self, other): # -> bool:
+    def covers(self, other):  # -> bool:
         """Returns True if the geometry covers the other, else False"""
         ...
-    
-    def contains(self, other): # -> bool:
+    def contains(self, other):  # -> bool:
         """Returns True if the geometry contains the other, else False"""
         ...
-    
-    def crosses(self, other): # -> bool:
+    def crosses(self, other):  # -> bool:
         """Returns True if the geometries cross, else False"""
         ...
-    
-    def disjoint(self, other): # -> bool:
+    def disjoint(self, other):  # -> bool:
         """Returns True if geometries are disjoint, else False"""
         ...
-    
-    def equals(self, other): # -> bool:
+    def equals(self, other):  # -> bool:
         """Returns True if geometries are equal, else False
 
         Refers to point-set equality (or topological equality), and is equivalent to
         (self.within(other) & self.contains(other))
         """
         ...
-    
-    def intersects(self, other): # -> bool:
+    def intersects(self, other):  # -> bool:
         """Returns True if geometries intersect, else False"""
         ...
-    
-    def overlaps(self, other): # -> bool:
+    def overlaps(self, other):  # -> bool:
         """Returns True if geometries overlap, else False"""
         ...
-    
-    def touches(self, other): # -> bool:
+    def touches(self, other):  # -> bool:
         """Returns True if geometries touch, else False"""
         ...
-    
-    def within(self, other): # -> bool:
+    def within(self, other):  # -> bool:
         """Returns True if geometry is within the other, else False"""
         ...
-    
-    def equals_exact(self, other, tolerance): # -> bool:
+    def equals_exact(self, other, tolerance):  # -> bool:
         """Returns True if geometries are equal to within a specified
         tolerance
 
@@ -448,8 +364,7 @@ class BaseGeometry:
         and in the same order for all components of a geometry
         """
         ...
-    
-    def almost_equals(self, other, decimal=...): # -> bool:
+    def almost_equals(self, other, decimal=...):  # -> bool:
         """Returns True if geometries are equal at all coordinates to a
         specified decimal place
 
@@ -457,12 +372,10 @@ class BaseGeometry:
         approximately equal and in the same order for all components of a geometry.
         """
         ...
-    
-    def relate_pattern(self, other, pattern): # -> bool:
+    def relate_pattern(self, other, pattern):  # -> bool:
         """Returns True if the DE-9IM string code for the relationship between
         the geometries satisfies the pattern, else False"""
         ...
-    
     @delegated
     def project(self, other, normalized=...):
         """Returns the distance along this geometry to a point nearest the
@@ -472,10 +385,9 @@ class BaseGeometry:
         length of the linear geometry.
         """
         ...
-    
     @delegated
     @exceptNull
-    def interpolate(self, distance, normalized=...): # -> BaseGeometry:
+    def interpolate(self, distance, normalized=...):  # -> BaseGeometry:
         """Return a point at the specified distance along a linear geometry
 
         Negative length values are taken as measured in the reverse
@@ -485,50 +397,27 @@ class BaseGeometry:
         fraction of the geometry's length.
         """
         ...
-    
-
 
 class BaseMultipartGeometry(BaseGeometry):
-    def shape_factory(self, *args):
-        ...
-    
+    def shape_factory(self, *args): ...
     @property
-    def ctypes(self):
-        ...
-    
+    def ctypes(self): ...
     @property
     def __array_interface__(self):
         """Provide the Numpy array protocol."""
         ...
-    
     @property
-    def coords(self):
-        ...
-    
+    def coords(self): ...
     @property
-    def geoms(self): # -> GeometrySequence | list[Unknown]:
-        ...
-    
-    def __bool__(self): # -> bool:
-        ...
-    
-    def __iter__(self): # -> Iterator[Unknown] | Iterator[Any]:
-        ...
-    
-    def __len__(self): # -> int:
-        ...
-    
-    def __getitem__(self, index): # -> Any:
-        ...
-    
-    def __eq__(self, other) -> bool:
-        ...
-    
-    def __ne__(self, other) -> bool:
-        ...
-    
+    def geoms(self): ...
+    def __bool__(self): ...
+    def __iter__(self): ...
+    def __len__(self): ...
+    def __getitem__(self, index): ...
+    def __eq__(self, other) -> bool: ...
+    def __ne__(self, other) -> bool: ...
     __hash__ = ...
-    def svg(self, scale_factor=..., color=...): # -> str:
+    def svg(self, scale_factor=..., color=...):  # -> str:
         """Returns a group of SVG elements for the multipart geometry.
 
         Parameters
@@ -540,46 +429,31 @@ class BaseMultipartGeometry(BaseGeometry):
             if geometry is valid, and "#ff3333" if invalid.
         """
         ...
-    
-
 
 class GeometrySequence:
     """
     Iterative access to members of a homogeneous multipart geometry.
     """
+
     shape_factory = ...
     _geom = ...
     __p__ = ...
     _ndim = ...
-    def __init__(self, parent, type) -> None:
-        ...
-    
-    def __iter__(self): # -> Generator[Unknown, None, None]:
-        ...
-    
-    def __len__(self): # -> Any:
-        ...
-    
-    def __getitem__(self, key): # -> Any:
-        ...
-    
-
+    def __init__(self, parent, type) -> None: ...
+    def __iter__(self): ...
+    def __len__(self): ...
+    def __getitem__(self, key): ...
 
 class HeterogeneousGeometrySequence(GeometrySequence):
     """
     Iterative access to a heterogeneous sequence of geometries.
     """
-    def __init__(self, parent) -> None:
-        ...
-    
 
+    def __init__(self, parent) -> None: ...
 
 class EmptyGeometry(BaseGeometry):
     def __init__(self) -> None:
         """Create an empty geometry."""
         ...
-    
 
-
-if __name__ == "__main__":
-    ...
+if __name__ == "__main__": ...

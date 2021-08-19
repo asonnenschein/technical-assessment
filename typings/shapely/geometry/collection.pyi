@@ -6,6 +6,7 @@ from shapely.geometry.base import BaseMultipartGeometry
 
 """Multi-part collections of geometries
 """
+
 class GeometryCollection(BaseMultipartGeometry):
     """A heterogenous collection of geometries
 
@@ -14,36 +15,30 @@ class GeometryCollection(BaseMultipartGeometry):
     geoms : sequence
         A sequence of Shapely geometry instances
     """
+
     def __init__(self, geoms=...) -> None:
         """
         Parameters
         ----------
         geoms : list
             A list of shapely geometry instances, which may be heterogenous.
-        
+
         Example
         -------
         Create a GeometryCollection with a Point and a LineString
-        
+
           >>> p = Point(51, -1)
           >>> l = LineString([(52, -1), (49, 2)])
           >>> gc = GeometryCollection([p, l])
         """
         ...
-    
     @property
-    def __geo_interface__(self): # -> dict[str, str | list[Unknown]]:
-        ...
-    
+    def __geo_interface__(self): ...
     @property
-    def geoms(self): # -> HeterogeneousGeometrySequence | list[Unknown]:
-        ...
-    
+    def geoms(self): ...
 
-
-def geos_geometrycollection_from_py(ob): # -> tuple[Any, Literal[2, 3]]:
+def geos_geometrycollection_from_py(ob):  # -> tuple[Any, Literal[2, 3]]:
     """Creates a GEOS GeometryCollection from a list of geometries"""
     ...
 
-if __name__ == "__main__":
-    ...
+if __name__ == "__main__": ...

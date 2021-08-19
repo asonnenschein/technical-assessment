@@ -12,13 +12,12 @@ Proxies for libgeos, GEOS-specific exceptions, and utilities
 LOG = ...
 if sys.version_info[0] >= 3:
     text_types = str
-else:
-    ...
-def load_dll(libname, fallbacks=..., mode=...): # -> CDLL:
-    ...
+else: ...
+
+def load_dll(libname, fallbacks=..., mode=...): ...
 
 _lgeos = ...
-if sys.platform.startswith('linux'):
+if sys.platform.startswith("linux"):
     geos_whl_so = ...
     c_alt_paths = ...
     free = ...
@@ -30,7 +29,8 @@ if geos_version >= (3, 1, 0):
 if geos_version >= (3, 1, 0):
     end_set = ...
     new_func_names = ...
-def make_logging_callback(func): # -> (fmt: Unknown, *fmt_args: Unknown) -> None:
+
+def make_logging_callback(func):  # -> (fmt: Unknown, *fmt_args: Unknown) -> None:
     """Error or notice handler callback producr
 
     Wraps a logger method, func, as a GEOS callback.
@@ -41,22 +41,19 @@ error_handler = ...
 notice_handler = ...
 error_h = EXCEPTION_HANDLER_FUNCTYPE(error_handler)
 notice_h = EXCEPTION_HANDLER_FUNCTYPE(notice_handler)
+
 class WKTReader:
     _lgeos = ...
     _reader = ...
     def __init__(self, lgeos) -> None:
         """Create WKT Reader"""
         ...
-    
-    def __del__(self): # -> None:
+    def __del__(self):  # -> None:
         """Destroy WKT Reader"""
         ...
-    
-    def read(self, text): # -> BaseGeometry:
+    def read(self, text):  # -> BaseGeometry:
         """Returns geometry from WKT"""
         ...
-    
-
 
 class WKTWriter:
     _lgeos = ...
@@ -67,42 +64,30 @@ class WKTWriter:
         _rounding_precision = ...
         _old_3d = ...
         @property
-        def trim(self): # -> Any:
+        def trim(self):  # -> Any:
             """Trimming of unnecessary decimals (default: True)"""
             ...
-        
         @trim.setter
-        def trim(self, value): # -> None:
-            ...
-        
+        def trim(self, value): ...
         @property
-        def rounding_precision(self): # -> Any:
+        def rounding_precision(self):  # -> Any:
             """Rounding precision when writing the WKT.
             A precision of -1 (default) disables it."""
             ...
-        
         @rounding_precision.setter
-        def rounding_precision(self, value): # -> None:
-            ...
-        
+        def rounding_precision(self, value): ...
         @property
         def output_dimension(self):
             """Output dimension, either 2 or 3 (default)"""
             ...
-        
         @output_dimension.setter
-        def output_dimension(self, value): # -> None:
-            ...
-        
+        def output_dimension(self, value): ...
         @property
-        def old_3d(self): # -> Any:
+        def old_3d(self):  # -> Any:
             """Show older style for 3D WKT, without 'Z' (default: False)"""
             ...
-        
         @old_3d.setter
-        def old_3d(self, value): # -> None:
-            ...
-        
+        def old_3d(self, value): ...
     def __init__(self, lgeos, **settings) -> None:
         """Create WKT Writer
 
@@ -118,20 +103,15 @@ class WKTWriter:
             output_dimension = 2
         """
         ...
-    
-    def __setattr__(self, name, value): # -> None:
+    def __setattr__(self, name, value):  # -> None:
         """Limit setting attributes"""
         ...
-    
-    def __del__(self): # -> None:
+    def __del__(self):  # -> None:
         """Destroy WKT Writer"""
         ...
-    
-    def write(self, geom): # -> str:
+    def write(self, geom):  # -> str:
         """Returns WKT string for geometry"""
         ...
-    
-
 
 class WKBReader:
     _lgeos = ...
@@ -139,20 +119,15 @@ class WKBReader:
     def __init__(self, lgeos) -> None:
         """Create WKB Reader"""
         ...
-    
-    def __del__(self): # -> None:
+    def __del__(self):  # -> None:
         """Destroy WKB Reader"""
         ...
-    
     def read(self, data):
         """Returns geometry from WKB"""
         ...
-    
     def read_hex(self, data):
         """Returns geometry from WKB hex"""
         ...
-    
-
 
 class WKBWriter:
     _lgeos = ...
@@ -164,60 +139,45 @@ class WKBWriter:
     def output_dimension(self):
         """Output dimension, either 2 or 3 (default)"""
         ...
-    
     @output_dimension.setter
-    def output_dimension(self, value): # -> None:
-        ...
-    
+    def output_dimension(self, value): ...
     @property
     def big_endian(self):
         """Byte order is big endian, True (default) or False"""
         ...
-    
     @big_endian.setter
-    def big_endian(self, value): # -> None:
-        ...
-    
+    def big_endian(self, value): ...
     @property
-    def include_srid(self): # -> bool:
+    def include_srid(self):  # -> bool:
         """Include SRID, True or False (default)"""
         ...
-    
     @include_srid.setter
-    def include_srid(self, value): # -> None:
-        ...
-    
+    def include_srid(self, value): ...
     def __init__(self, lgeos, **settings) -> None:
         """Create WKB Writer"""
         ...
-    
-    def __setattr__(self, name, value): # -> None:
+    def __setattr__(self, name, value):  # -> None:
         """Limit setting attributes"""
         ...
-    
-    def __del__(self): # -> None:
+    def __del__(self):  # -> None:
         """Destroy WKB Writer"""
         ...
-    
-    def write(self, geom): # -> bytes:
+    def write(self, geom):  # -> bytes:
         """Returns WKB byte string for geometry"""
         ...
-    
-    def write_hex(self, geom): # -> str:
+    def write_hex(self, geom):  # -> str:
         """Returns WKB hex string for geometry"""
         ...
-    
 
-
-def errcheck_wkb(result, func, argtuple): # -> bytes | None:
+def errcheck_wkb(result, func, argtuple):  # -> bytes | None:
     """Returns bytes from a C pointer"""
     ...
 
-def errcheck_just_free(result, func, argtuple): # -> str:
+def errcheck_just_free(result, func, argtuple):  # -> str:
     """Returns string from a C pointer"""
     ...
 
-def errcheck_null_exception(result, func, argtuple): # -> str:
+def errcheck_null_exception(result, func, argtuple):  # -> str:
     """Wraps errcheck_just_free
 
     Raises TopologicalError if result is NULL.
@@ -233,101 +193,73 @@ class LGEOSBase(threading.local):
 
     This is a base class. Do not instantiate.
     """
+
     methods = ...
-    def __init__(self, dll) -> None:
-        ...
-    
-    def __del__(self): # -> None:
+    def __init__(self, dll) -> None: ...
+    def __del__(self):  # -> None:
         """Cleanup GEOS related processes"""
         ...
-    
-
 
 class LGEOS300(LGEOSBase):
-    """Proxy for GEOS 3.0.0-CAPI-1.4.1
-    """
+    """Proxy for GEOS 3.0.0-CAPI-1.4.1"""
+
     geos_version = ...
     geos_capi_version = ...
-    def __init__(self, dll) -> None:
-        ...
-    
-
+    def __init__(self, dll) -> None: ...
 
 class LGEOS310(LGEOSBase):
-    """Proxy for GEOS 3.1.0-CAPI-1.5.0
-    """
+    """Proxy for GEOS 3.1.0-CAPI-1.5.0"""
+
     geos_version = ...
     geos_capi_version = ...
-    def __init__(self, dll) -> None:
-        ...
-    
-
+    def __init__(self, dll) -> None: ...
 
 class LGEOS311(LGEOS310):
-    """Proxy for GEOS 3.1.1-CAPI-1.6.0
-    """
+    """Proxy for GEOS 3.1.1-CAPI-1.6.0"""
+
     geos_version = ...
     geos_capi_version = ...
-    def __init__(self, dll) -> None:
-        ...
-    
-
+    def __init__(self, dll) -> None: ...
 
 class LGEOS320(LGEOS311):
-    """Proxy for GEOS 3.2.0-CAPI-1.6.0
-    """
+    """Proxy for GEOS 3.2.0-CAPI-1.6.0"""
+
     geos_version = ...
     geos_capi_version = ...
-    def __init__(self, dll) -> None:
-        ...
-    
-
+    def __init__(self, dll) -> None: ...
 
 class LGEOS330(LGEOS320):
-    """Proxy for GEOS 3.3.0-CAPI-1.7.0
-    """
+    """Proxy for GEOS 3.3.0-CAPI-1.7.0"""
+
     geos_version = ...
     geos_capi_version = ...
-    def __init__(self, dll) -> None:
-        ...
-    
-
+    def __init__(self, dll) -> None: ...
 
 class LGEOS340(LGEOS330):
-    """Proxy for GEOS 3.4.0-CAPI-1.8.0
-    """
+    """Proxy for GEOS 3.4.0-CAPI-1.8.0"""
+
     geos_version = ...
     geos_capi_version = ...
-    def __init__(self, dll) -> None:
-        ...
-    
-
+    def __init__(self, dll) -> None: ...
 
 class LGEOS350(LGEOS340):
-    """Proxy for GEOS 3.5.0-CAPI-1.9.0
-    """
+    """Proxy for GEOS 3.5.0-CAPI-1.9.0"""
+
     geos_version = ...
     geos_capi_version = ...
-    def __init__(self, dll) -> None:
-        ...
-    
-
+    def __init__(self, dll) -> None: ...
 
 class LGEOS360(LGEOS350):
-    """Proxy for GEOS 3.6.0-CAPI-1.10.0
-    """
+    """Proxy for GEOS 3.6.0-CAPI-1.10.0"""
+
     geos_version = ...
     geos_capi_version = ...
-    def __init__(self, dll) -> None:
-        ...
-    
-
+    def __init__(self, dll) -> None: ...
 
 if geos_version >= (3, 6, 0):
     L = ...
 else:
     L = ...
 lgeos = ...
-def cleanup(proxy): # -> None:
-    ...
 
+def cleanup(proxy): ...

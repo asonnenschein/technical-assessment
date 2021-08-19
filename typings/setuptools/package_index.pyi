@@ -14,29 +14,34 @@ EXTENSIONS = ...
 _SOCKET_TIMEOUT = ...
 _tmpl = ...
 user_agent = ...
-def parse_requirement_arg(spec): # -> Requirement:
-    ...
 
-def parse_bdist_wininst(name): # -> tuple[Unknown | None, Unknown | None, Literal['win32', 'win-amd64'] | None]:
+def parse_requirement_arg(spec): ...
+def parse_bdist_wininst(
+    name,
+):  # -> tuple[Unknown | None, Unknown | None, Literal['win32', 'win-amd64'] | None]:
     """Return (base,pyversion) or (None,None) for possible .exe name"""
     ...
 
-def egg_info_for_url(url): # -> tuple[str, str]:
-    ...
-
-def distros_for_url(url, metadata=...): # -> Generator[Distribution, None, None]:
+def egg_info_for_url(url): ...
+def distros_for_url(url, metadata=...):  # -> Generator[Distribution, None, None]:
     """Yield egg or source distribution objects that might be found at a URL"""
     ...
 
-def distros_for_location(location, basename, metadata=...): # -> list[Distribution] | Generator[Distribution, None, None]:
+def distros_for_location(
+    location, basename, metadata=...
+):  # -> list[Distribution] | Generator[Distribution, None, None]:
     """Yield egg or source distribution objects based on basename"""
     ...
 
-def distros_for_filename(filename, metadata=...): # -> list[Distribution] | Generator[Distribution, None, None]:
+def distros_for_filename(
+    filename, metadata=...
+):  # -> list[Distribution] | Generator[Distribution, None, None]:
     """Yield possible egg or source distribution objects based on a filename"""
     ...
 
-def interpret_distro_name(location, basename, metadata, py_version=..., precedence=..., platform=...): # -> Generator[Distribution, None, None]:
+def interpret_distro_name(
+    location, basename, metadata, py_version=..., precedence=..., platform=...
+):  # -> Generator[Distribution, None, None]:
     """Generate alternative interpretations of a source distro name
 
     Note: if `location` is a filesystem filename, you should call
@@ -45,7 +50,7 @@ def interpret_distro_name(location, basename, metadata, py_version=..., preceden
     """
     ...
 
-def unique_values(func): # -> (*args: Unknown, **kwargs: Unknown) -> Unknown:
+def unique_values(func):  # -> (*args: Unknown, **kwargs: Unknown) -> Unknown:
     """
     Wrap a function returning an iterable such that the resulting iterable
     only ever yields unique items.
@@ -53,8 +58,9 @@ def unique_values(func): # -> (*args: Unknown, **kwargs: Unknown) -> Unknown:
     ...
 
 REL = ...
+
 @unique_values
-def find_external_links(url, page): # -> Generator[str, None, None]:
+def find_external_links(url, page):  # -> Generator[str, None, None]:
     """Find rel="homepage" and rel="download" links in `page`, yielding URLs"""
     ...
 
@@ -62,103 +68,68 @@ class ContentChecker:
     """
     A null content checker that defines the interface for checking content
     """
-    def feed(self, block): # -> None:
+
+    def feed(self, block):  # -> None:
         """
         Feed a block of data to the hash.
         """
         ...
-    
-    def is_valid(self): # -> Literal[True]:
+    def is_valid(self):  # -> Literal[True]:
         """
         Check the hash. Return False if validation fails.
         """
         ...
-    
-    def report(self, reporter, template): # -> None:
+    def report(self, reporter, template):  # -> None:
         """
         Call reporter with information about the checker (hash name)
         substituted into the template.
         """
         ...
-    
-
 
 class HashChecker(ContentChecker):
     pattern = ...
-    def __init__(self, hash_name, expected) -> None:
-        ...
-    
+    def __init__(self, hash_name, expected) -> None: ...
     @classmethod
-    def from_url(cls, url): # -> ContentChecker | HashChecker:
+    def from_url(cls, url):  # -> ContentChecker | HashChecker:
         "Construct a (possibly null) ContentChecker from a URL"
         ...
-    
-    def feed(self, block): # -> None:
-        ...
-    
-    def is_valid(self): # -> bool:
-        ...
-    
-    def report(self, reporter, template):
-        ...
-    
-
+    def feed(self, block): ...
+    def is_valid(self): ...
+    def report(self, reporter, template): ...
 
 class PackageIndex(Environment):
     """A distribution index that scans web pages for download URLs"""
-    def __init__(self, index_url=..., hosts=..., ca_bundle=..., verify_ssl=..., *args, **kw) -> None:
-        ...
-    
-    def process_url(self, url, retrieve=...): # -> None:
+
+    def __init__(
+        self, index_url=..., hosts=..., ca_bundle=..., verify_ssl=..., *args, **kw
+    ) -> None: ...
+    def process_url(self, url, retrieve=...):  # -> None:
         """Evaluate a URL as a possible download, and maybe retrieve it"""
         ...
-    
-    def process_filename(self, fn, nested=...): # -> None:
-        ...
-    
-    def url_ok(self, url, fatal=...): # -> Literal[True] | None:
-        ...
-    
-    def scan_egg_links(self, search_path): # -> None:
-        ...
-    
-    def scan_egg_link(self, path, entry): # -> None:
-        ...
-    
-    def process_index(self, url, page): # -> str:
+    def process_filename(self, fn, nested=...): ...
+    def url_ok(self, url, fatal=...): ...
+    def scan_egg_links(self, search_path): ...
+    def scan_egg_link(self, path, entry): ...
+    def process_index(self, url, page):  # -> str:
         """Process the contents of a PyPI page"""
         ...
-    
-    def need_version_info(self, url): # -> None:
-        ...
-    
-    def scan_all(self, msg=..., *args): # -> None:
-        ...
-    
-    def find_packages(self, requirement): # -> None:
-        ...
-    
-    def obtain(self, requirement, installer=...): # -> Distribution:
-        ...
-    
-    def check_hash(self, checker, filename, tfp): # -> None:
+    def need_version_info(self, url): ...
+    def scan_all(self, msg=..., *args): ...
+    def find_packages(self, requirement): ...
+    def obtain(self, requirement, installer=...): ...
+    def check_hash(self, checker, filename, tfp):  # -> None:
         """
         checker is a ContentChecker
         """
         ...
-    
-    def add_find_links(self, urls): # -> None:
+    def add_find_links(self, urls):  # -> None:
         """Add `urls` to the list that will be prescanned for searches"""
         ...
-    
-    def prescan(self): # -> None:
+    def prescan(self):  # -> None:
         """Scan urls scheduled for prescanning (e.g. --find-links)"""
         ...
-    
-    def not_found_in_index(self, requirement): # -> None:
-        ...
-    
-    def download(self, spec, tmpdir): # -> str | Any | None:
+    def not_found_in_index(self, requirement): ...
+    def download(self, spec, tmpdir):  # -> str | Any | None:
         """Locate and/or download `spec` to `tmpdir`, returning a local path
 
         `spec` may be a ``Requirement`` object, or a string containing a URL,
@@ -177,8 +148,15 @@ class PackageIndex(Environment):
         raised if a problem occurs during downloading.
         """
         ...
-    
-    def fetch_distribution(self, requirement, tmpdir, force_scan=..., source=..., develop_ok=..., local_index=...): # -> Requirement | None:
+    def fetch_distribution(
+        self,
+        requirement,
+        tmpdir,
+        force_scan=...,
+        source=...,
+        develop_ok=...,
+        local_index=...,
+    ):  # -> Requirement | None:
         """Obtain a distribution suitable for fulfilling `requirement`
 
         `requirement` must be a ``pkg_resources.Requirement`` instance.
@@ -196,8 +174,7 @@ class PackageIndex(Environment):
         format) will be ignored.
         """
         ...
-    
-    def fetch(self, requirement, tmpdir, force_scan=..., source=...): # -> None:
+    def fetch(self, requirement, tmpdir, force_scan=..., source=...):  # -> None:
         """Obtain a file suitable for fulfilling `requirement`
 
         DEPRECATED; use the ``fetch_distribution()`` method now instead.  For
@@ -206,36 +183,19 @@ class PackageIndex(Environment):
         object.
         """
         ...
-    
-    def gen_setup(self, filename, fragment, tmpdir): # -> str:
-        ...
-    
+    def gen_setup(self, filename, fragment, tmpdir): ...
     dl_blocksize = ...
-    def reporthook(self, url, filename, blocknum, blksize, size): # -> None:
-        ...
-    
-    def open_url(self, url, warning=...): # -> _UrlopenRet | HTTPError | None:
-        ...
-    
-    def scan_url(self, url): # -> None:
-        ...
-    
-    def debug(self, msg, *args): # -> None:
-        ...
-    
-    def info(self, msg, *args): # -> None:
-        ...
-    
-    def warn(self, msg, *args): # -> None:
-        ...
-    
-
+    def reporthook(self, url, filename, blocknum, blksize, size): ...
+    def open_url(self, url, warning=...): ...
+    def scan_url(self, url): ...
+    def debug(self, msg, *args): ...
+    def info(self, msg, *args): ...
+    def warn(self, msg, *args): ...
 
 entity_sub = ...
-def decode_entity(match):
-    ...
 
-def htmldecode(text): # -> str:
+def decode_entity(match): ...
+def htmldecode(text):  # -> str:
     """
     Decode HTML entities in the given text.
 
@@ -246,23 +206,16 @@ def htmldecode(text): # -> str:
     """
     ...
 
-def socket_timeout(timeout=...): # -> (func: Unknown) -> (*args: Unknown, **kwargs: Unknown) -> Unknown:
-    ...
+def socket_timeout(timeout=...): ...
 
 class Credential:
     """
     A username/password pair. Use like a namedtuple.
     """
-    def __init__(self, username, password) -> None:
-        ...
-    
-    def __iter__(self): # -> Generator[Unknown, None, None]:
-        ...
-    
-    def __str__(self) -> str:
-        ...
-    
 
+    def __init__(self, username, password) -> None: ...
+    def __iter__(self): ...
+    def __str__(self) -> str: ...
 
 class PyPIConfig(configparser.RawConfigParser):
     def __init__(self) -> None:
@@ -270,29 +223,22 @@ class PyPIConfig(configparser.RawConfigParser):
         Load from ~/.pypirc
         """
         ...
-    
     @property
-    def creds_by_repository(self): # -> dict[str, Credential]:
-        ...
-    
-    def find_credential(self, url): # -> Credential | None:
+    def creds_by_repository(self): ...
+    def find_credential(self, url):  # -> Credential | None:
         """
         If the URL indicated appears to be a repository defined in this
         config, return the credential for that repository.
         """
         ...
-    
-
 
 def open_with_auth(url, opener=...):
     """Open a urllib2 request, handling HTTP authentication"""
     ...
 
 open_with_auth = ...
-def fix_sf_url(url):
-    ...
 
-def local_open(url): # -> _UrlopenRet | HTTPError:
+def fix_sf_url(url): ...
+def local_open(url):  # -> _UrlopenRet | HTTPError:
     """Read a local path, with special support for directories"""
     ...
-

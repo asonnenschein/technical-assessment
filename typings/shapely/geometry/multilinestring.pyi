@@ -8,12 +8,12 @@ from shapely.geometry.proxy import CachingGeometryProxy
 
 """Collections of linestrings and related utilities
 """
-if sys.version_info[0] < 3:
-    ...
+if sys.version_info[0] < 3: ...
+
 class MultiLineString(BaseMultipartGeometry):
     """
     A collection of one or more line strings
-    
+
     A MultiLineString has non-zero length and zero area.
 
     Attributes
@@ -21,6 +21,7 @@ class MultiLineString(BaseMultipartGeometry):
     geoms : sequence
         A sequence of LineStrings
     """
+
     def __init__(self, lines=...) -> None:
         """
         Parameters
@@ -37,15 +38,10 @@ class MultiLineString(BaseMultipartGeometry):
           >>> lines = MultiLineString( [[[0.0, 0.0], [1.0, 2.0]]] )
         """
         ...
-    
-    def shape_factory(self, *args):
-        ...
-    
+    def shape_factory(self, *args): ...
     @property
-    def __geo_interface__(self): # -> dict[str, str | tuple[tuple[Unknown, ...], ...]]:
-        ...
-    
-    def svg(self, scale_factor=..., stroke_color=...): # -> str:
+    def __geo_interface__(self): ...
+    def svg(self, scale_factor=..., stroke_color=...):  # -> str:
         """Returns a group of SVG polyline elements for the LineString geometry.
 
         Parameters
@@ -57,23 +53,16 @@ class MultiLineString(BaseMultipartGeometry):
             geometry is valid, and "#ff3333" if invalid.
         """
         ...
-    
-
 
 class MultiLineStringAdapter(CachingGeometryProxy, MultiLineString):
     context = ...
     _other_owned = ...
-    def __init__(self, context) -> None:
-        ...
-    
+    def __init__(self, context) -> None: ...
 
-
-def asMultiLineString(context): # -> MultiLineStringAdapter:
+def asMultiLineString(context):  # -> MultiLineStringAdapter:
     """Adapts a sequence of objects to the MultiLineString interface"""
     ...
 
-def geos_multilinestring_from_py(ob): # -> tuple[Any | Unknown, Unknown] | tuple[Any, int | Any | Unknown]:
-    ...
+def geos_multilinestring_from_py(ob): ...
 
-if __name__ == "__main__":
-    ...
+if __name__ == "__main__": ...

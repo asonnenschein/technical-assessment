@@ -11,16 +11,15 @@ from functools import lru_cache, reduce
 from collections.abc import Sequence
 
 """Web mercator XYZ tile utilities"""
-if sys.version_info < (3, ):
-    ...
-else:
-    ...
+if sys.version_info < (3,): ...
+else: ...
 __version__ = ...
 R2D = ...
 RE = ...
 CE = ...
 EPSILON = ...
 LL_EPSILON = ...
+
 class Tile(namedtuple("Tile", ["x", "y", "z"])):
     """An XYZ web mercator tile
 
@@ -30,51 +29,51 @@ class Tile(namedtuple("Tile", ["x", "y", "z"])):
         x and y indexes of the tile and zoom level z.
 
     """
-    def __new__(cls, x, y, z): # -> Tile:
+
+    def __new__(cls, x, y, z):  # -> Tile:
         """A new instance"""
         ...
-    
-
 
 LngLat = ...
 LngLatBbox = ...
 Bbox = ...
+
 class MercantileError(Exception):
     """Base exception"""
-    ...
 
+    ...
 
 class InvalidLatitudeError(MercantileError):
     """Raised when math errors occur beyond ~85 degrees N or S"""
-    ...
 
+    ...
 
 class InvalidZoomError(MercantileError):
     """Raised when a zoom level is invalid"""
-    ...
 
+    ...
 
 class ParentTileError(MercantileError):
     """Raised when a parent tile cannot be determined"""
-    ...
 
+    ...
 
 class QuadKeyError(MercantileError):
     """Raised when errors occur in computing or parsing quad keys"""
-    ...
 
+    ...
 
 class TileArgParsingError(MercantileError):
     """Raised when errors occur in parsing a function's tile arg(s)"""
-    ...
 
+    ...
 
 class TileError(MercantileError):
     """Raised when a tile can't be determined"""
+
     ...
 
-
-def ul(*tile): # -> LngLat:
+def ul(*tile):  # -> LngLat:
     """Returns the upper left longitude and latitude of a tile
 
     Parameters
@@ -98,7 +97,7 @@ def ul(*tile): # -> LngLat:
     """
     ...
 
-def bounds(*tile): # -> LngLatBbox:
+def bounds(*tile):  # -> LngLatBbox:
     """Returns the bounding box of a tile
 
     Parameters
@@ -113,10 +112,8 @@ def bounds(*tile): # -> LngLatBbox:
     """
     ...
 
-def truncate_lnglat(lng, lat): # -> tuple[float | Unknown, float | Unknown]:
-    ...
-
-def xy(lng, lat, truncate=...): # -> tuple[float, float]:
+def truncate_lnglat(lng, lat): ...
+def xy(lng, lat, truncate=...):  # -> tuple[float, float]:
     """Convert longitude and latitude to web mercator x, y
 
     Parameters
@@ -135,7 +132,7 @@ def xy(lng, lat, truncate=...): # -> tuple[float, float]:
     """
     ...
 
-def lnglat(x, y, truncate=...): # -> LngLat:
+def lnglat(x, y, truncate=...):  # -> LngLat:
     """Convert web mercator x, y to longitude and latitude
 
     Parameters
@@ -152,7 +149,7 @@ def lnglat(x, y, truncate=...): # -> LngLat:
     """
     ...
 
-def neighbors(*tile, **kwargs): # -> list[Unknown]:
+def neighbors(*tile, **kwargs):  # -> list[Unknown]:
     """The neighbors of a tile
 
     The neighbors function makes no guarantees regarding neighbor tile
@@ -178,7 +175,7 @@ def neighbors(*tile, **kwargs): # -> list[Unknown]:
     """
     ...
 
-def xy_bounds(*tile): # -> Bbox:
+def xy_bounds(*tile):  # -> Bbox:
     """Get the web mercator bounding box of a tile
 
     Parameters
@@ -198,7 +195,7 @@ def xy_bounds(*tile): # -> Bbox:
     """
     ...
 
-def tile(lng, lat, zoom, truncate=...): # -> Tile:
+def tile(lng, lat, zoom, truncate=...):  # -> Tile:
     """Get the tile containing a longitude and latitude
 
     Parameters
@@ -217,7 +214,7 @@ def tile(lng, lat, zoom, truncate=...): # -> Tile:
     """
     ...
 
-def quadkey(*tile): # -> str:
+def quadkey(*tile):  # -> str:
     """Get the quadkey of a tile
 
     Parameters
@@ -232,7 +229,7 @@ def quadkey(*tile): # -> str:
     """
     ...
 
-def quadkey_to_tile(qk): # -> Tile:
+def quadkey_to_tile(qk):  # -> Tile:
     """Get the tile corresponding to a quadkey
 
     Parameters
@@ -247,7 +244,9 @@ def quadkey_to_tile(qk): # -> Tile:
     """
     ...
 
-def tiles(west, south, east, north, zooms, truncate=...): # -> Generator[Tile, None, None]:
+def tiles(
+    west, south, east, north, zooms, truncate=...
+):  # -> Generator[Tile, None, None]:
     """Get the tiles overlapped by a geographic bounding box
 
     Parameters
@@ -271,7 +270,7 @@ def tiles(west, south, east, north, zooms, truncate=...): # -> Generator[Tile, N
     """
     ...
 
-def parent(*tile, **kwargs): # -> Tile | None:
+def parent(*tile, **kwargs):  # -> Tile | None:
     """Get the parent of a tile
 
     The parent is the tile of one zoom level lower that contains the
@@ -299,7 +298,7 @@ def parent(*tile, **kwargs): # -> Tile | None:
     """
     ...
 
-def children(*tile, **kwargs): # -> list[Tile]:
+def children(*tile, **kwargs):  # -> list[Tile]:
     """Get the children of a tile
 
     The children are ordered: top-left, top-right, bottom-right, bottom-left.
@@ -333,7 +332,7 @@ def children(*tile, **kwargs): # -> list[Tile]:
     """
     ...
 
-def simplify(tiles): # -> set[Unknown] | list[Unknown]:
+def simplify(tiles):  # -> set[Unknown] | list[Unknown]:
     """Reduces the size of the tileset as much as possible by merging leaves into parents.
 
     Parameters
@@ -347,10 +346,8 @@ def simplify(tiles): # -> set[Unknown] | list[Unknown]:
     """
     ...
 
-def rshift(val, n):
-    ...
-
-def bounding_tile(*bbox, **kwds): # -> Tile:
+def rshift(val, n): ...
+def bounding_tile(*bbox, **kwds):  # -> Tile:
     """Get the smallest tile containing a geographic bounding box
 
     NB: when the bbox spans lines of lng 0 or lat 0, the bounding tile
@@ -368,7 +365,9 @@ def bounding_tile(*bbox, **kwds): # -> Tile:
     """
     ...
 
-def feature(tile, fid=..., props=..., projected=..., buffer=..., precision=...): # -> dict[str, str | list[int | Unknown | float] | dict[str, str | list[list[list[int | Unknown | float]]]] | dict[str, str]]:
+def feature(
+    tile, fid=..., props=..., projected=..., buffer=..., precision=...
+):  # -> dict[str, str | list[int | Unknown | float] | dict[str, str | list[list[list[int | Unknown | float]]]] | dict[str, str]]:
     """Get the GeoJSON feature corresponding to a tile
 
     Parameters
@@ -395,7 +394,7 @@ def feature(tile, fid=..., props=..., projected=..., buffer=..., precision=...):
     """
     ...
 
-def geojson_bounds(obj): # -> LngLatBbox:
+def geojson_bounds(obj):  # -> LngLatBbox:
     """Returns the bounding box of a GeoJSON object
 
     Parameters
@@ -411,7 +410,7 @@ def geojson_bounds(obj): # -> LngLatBbox:
     ...
 
 @lru_cache(maxsize=28)
-def minmax(zoom): # -> tuple[Literal[0], Unknown]:
+def minmax(zoom):  # -> tuple[Literal[0], Unknown]:
     """Minimum and maximum tile coordinates for a zoom level
 
     Parameters
@@ -442,4 +441,3 @@ def minmax(zoom): # -> tuple[Literal[0], Unknown]:
 
     """
     ...
-

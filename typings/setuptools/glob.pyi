@@ -9,7 +9,8 @@ Changes include:
  * `yield from` and PEP3102 `*` removed.
  * Hidden files are not ignored.
 """
-def glob(pathname, recursive=...): # -> list[Unknown | bytes | str]:
+
+def glob(pathname, recursive=...):  # -> list[Unknown | bytes | str]:
     """Return a list of paths matching a pathname pattern.
 
     The pattern may contain simple shell-style wildcards a la
@@ -22,7 +23,7 @@ def glob(pathname, recursive=...): # -> list[Unknown | bytes | str]:
     """
     ...
 
-def iglob(pathname, recursive=...): # -> Generator[Unknown | bytes | str, None, None]:
+def iglob(pathname, recursive=...):  # -> Generator[Unknown | bytes | str, None, None]:
     """Return an iterator which yields the paths matching a pathname pattern.
 
     The pattern may contain simple shell-style wildcards a la
@@ -35,22 +36,14 @@ def iglob(pathname, recursive=...): # -> Generator[Unknown | bytes | str, None, 
     """
     ...
 
-def glob1(dirname, pattern): # -> List[bytes]:
-    ...
-
-def glob0(dirname, basename): # -> list[Unknown]:
-    ...
-
-def glob2(dirname, pattern): # -> Generator[Unknown | bytes | str, None, None]:
-    ...
+def glob1(dirname, pattern): ...
+def glob0(dirname, basename): ...
+def glob2(dirname, pattern): ...
 
 magic_check = ...
 magic_check_bytes = ...
-def has_magic(s): # -> bool:
-    ...
 
+def has_magic(s): ...
 def escape(pathname):
-    """Escape all special characters.
-    """
+    """Escape all special characters."""
     ...
-

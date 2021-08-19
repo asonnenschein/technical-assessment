@@ -22,12 +22,14 @@ __version__ = ...
 bootstrap_install_from = ...
 run_2to3_on_doctests = ...
 lib2to3_fixer_packages = ...
+
 class PackageFinder:
     """
     Generate a list of all Python packages found within a directory
     """
+
     @classmethod
-    def find(cls, where=..., exclude=..., include=...): # -> list[str]:
+    def find(cls, where=..., exclude=..., include=...):  # -> list[str]:
         """Return a list all Python packages found within directory 'where'
 
         'where' is the root directory which will be searched for packages.  It
@@ -44,19 +46,16 @@ class PackageFinder:
         shell style wildcard patterns just like 'exclude'.
         """
         ...
-    
 
-
-class PEP420PackageFinder(PackageFinder):
-    ...
-
+class PEP420PackageFinder(PackageFinder): ...
 
 find_packages = ...
 find_namespace_packages = ...
-def setup(**attrs): # -> None:
-    ...
+
+def setup(**attrs): ...
 
 _Command = ...
+
 class Command(_Command):
     __doc__ = ...
     command_consumes_arguments = ...
@@ -66,21 +65,16 @@ class Command(_Command):
         vars(self) with any keyword parameters.
         """
         ...
-    
-    def ensure_string_list(self, option): # -> None:
+    def ensure_string_list(self, option):  # -> None:
         r"""Ensure that 'option' is a list of strings.  If 'option' is
         currently a string, we split it either on /,\s*/ or /\s+/, so
         "foo bar baz", "foo,bar,baz", and "foo,   bar baz" all become
         ["foo", "bar", "baz"].
         """
         ...
-    
-    def reinitialize_command(self, command, reinit_subcommands=..., **kw): # -> Any:
-        ...
-    
+    def reinitialize_command(self, command, reinit_subcommands=..., **kw): ...
 
-
-def findall(dir=...): # -> list[bytes | str]:
+def findall(dir=...):  # -> list[bytes | str]:
     """
     Find all files under 'dir' and return the list of full filenames.
     Unless dir is '.', return full filenames with dir prepended.
@@ -89,6 +83,5 @@ def findall(dir=...): # -> list[bytes | str]:
 
 class sic(str):
     """Treat this string as-is (https://en.wikipedia.org/wiki/Sic)"""
+
     ...
-
-

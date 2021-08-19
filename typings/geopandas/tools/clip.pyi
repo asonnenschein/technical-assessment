@@ -9,6 +9,7 @@ geopandas.clip
 A module to clip vector data using GeoPandas.
 
 """
+
 def clip(gdf, mask, keep_geom_type=...):
     """Clip points, lines, or polygon geometries to the mask extent.
 
@@ -54,4 +55,3 @@ def clip(gdf, mask, keep_geom_type=...):
     (12, 2)
     """
     ...
-

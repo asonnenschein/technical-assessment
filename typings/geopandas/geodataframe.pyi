@@ -9,6 +9,7 @@ from geopandas.geoseries import inherit_doc
 from . import _compat as compat
 
 DEFAULT_GEO_COLUMN_NAME = ...
+
 class GeoDataFrame(GeoPandasBase, DataFrame):
     """
     A GeoDataFrame object is a pandas.DataFrame that has a column
@@ -60,16 +61,15 @@ class GeoDataFrame(GeoPandasBase, DataFrame):
     --------
     GeoSeries : Series object designed to store shapely geometry objects
     """
+
     _metadata = ...
     _geometry_column_name = ...
-    def __init__(self, *args, geometry=..., crs=..., **kwargs) -> None:
-        ...
-    
-    def __setattr__(self, attr, val): # -> None:
-        ...
-    
+    def __init__(self, *args, geometry=..., crs=..., **kwargs) -> None: ...
+    def __setattr__(self, attr, val): ...
     geometry = ...
-    def set_geometry(self, col, drop=..., inplace=..., crs=...): # -> GeoDataFrame | DataFrame | None:
+    def set_geometry(
+        self, col, drop=..., inplace=..., crs=...
+    ):  # -> GeoDataFrame | DataFrame | None:
         """
         Set the GeoDataFrame geometry using either an existing column or
         the specified input. By default yields a new object.
@@ -126,8 +126,7 @@ class GeoDataFrame(GeoPandasBase, DataFrame):
         GeoDataFrame.rename_geometry : rename an active geometry column
         """
         ...
-    
-    def rename_geometry(self, col, inplace=...): # -> None:
+    def rename_geometry(self, col, inplace=...):  # -> None:
         """
         Renames the GeoDataFrame geometry column to
         the specified name. By default yields a new object.
@@ -161,9 +160,8 @@ class GeoDataFrame(GeoPandasBase, DataFrame):
         GeoDataFrame.set_geometry : set the active geometry
         """
         ...
-    
     @property
-    def crs(self): # -> CRS | None:
+    def crs(self):  # -> CRS | None:
         """
         The Coordinate Reference System (CRS) represented as a ``pyproj.CRS``
         object.
@@ -197,17 +195,13 @@ class GeoDataFrame(GeoPandasBase, DataFrame):
 
         """
         ...
-    
     @crs.setter
-    def crs(self, value): # -> None:
+    def crs(self, value):  # -> None:
         """Sets the value of the crs"""
         ...
-    
-    def __setstate__(self, state): # -> None:
-        ...
-    
+    def __setstate__(self, state): ...
     @classmethod
-    def from_dict(cls, data, geometry=..., crs=..., **kwargs): # -> GeoDataFrame:
+    def from_dict(cls, data, geometry=..., crs=..., **kwargs):  # -> GeoDataFrame:
         """
         Construct GeoDataFrame from dict of array-like or dicts by
         overiding DataFrame.from_dict method with geometry and crs
@@ -230,7 +224,6 @@ class GeoDataFrame(GeoPandasBase, DataFrame):
 
         """
         ...
-    
     @classmethod
     def from_file(cls, filename, **kwargs):
         """Alternate constructor to create a ``GeoDataFrame`` from a file.
@@ -281,9 +274,8 @@ class GeoDataFrame(GeoPandasBase, DataFrame):
 
         """
         ...
-    
     @classmethod
-    def from_features(cls, features, crs=..., columns=...): # -> GeoDataFrame:
+    def from_features(cls, features, crs=..., columns=...):  # -> GeoDataFrame:
         """
         Alternate constructor to create GeoDataFrame from an iterable of
         features or a feature collection.
@@ -343,9 +335,19 @@ class GeoDataFrame(GeoPandasBase, DataFrame):
 
         """
         ...
-    
     @classmethod
-    def from_postgis(cls, sql, con, geom_col=..., crs=..., index_col=..., coerce_float=..., parse_dates=..., params=..., chunksize=...):
+    def from_postgis(
+        cls,
+        sql,
+        con,
+        geom_col=...,
+        crs=...,
+        index_col=...,
+        coerce_float=...,
+        parse_dates=...,
+        params=...,
+        chunksize=...,
+    ):
         """
         Alternate constructor to create a ``GeoDataFrame`` from a sql query
         containing a geometry column in WKB representation.
@@ -403,8 +405,7 @@ class GeoDataFrame(GeoPandasBase, DataFrame):
         geopandas.read_postgis : read PostGIS database to GeoDataFrame
         """
         ...
-    
-    def to_json(self, na=..., show_bbox=..., drop_id=..., **kwargs): # -> str:
+    def to_json(self, na=..., show_bbox=..., drop_id=..., **kwargs):  # -> str:
         """
         Returns a GeoJSON representation of the ``GeoDataFrame`` as a string.
 
@@ -458,9 +459,8 @@ class GeoDataFrame(GeoPandasBase, DataFrame):
 
         """
         ...
-    
     @property
-    def __geo_interface__(self): # -> dict[str, str | list[dict[str, str]]]:
+    def __geo_interface__(self):  # -> dict[str, str | list[dict[str, str]]]:
         """Returns a ``GeoDataFrame`` as a python feature collection.
 
         Implements the `geo_interface`. The returned python data structure
@@ -491,8 +491,9 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
 
         """
         ...
-    
-    def iterfeatures(self, na=..., show_bbox=..., drop_id=...): # -> Generator[dict[str, str], None, None]:
+    def iterfeatures(
+        self, na=..., show_bbox=..., drop_id=...
+    ):  # -> Generator[dict[str, str], None, None]:
         """
         Returns an iterator that yields feature dictionaries that comply with
         __geo_interface__
@@ -531,8 +532,7 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
 'type': 'Point', 'coordinates': (1.0, 2.0)}}
         """
         ...
-    
-    def to_wkb(self, hex=..., **kwargs): # -> DataFrame:
+    def to_wkb(self, hex=..., **kwargs):  # -> DataFrame:
         """
         Encode all geometry columns in the GeoDataFrame to WKB.
 
@@ -551,8 +551,7 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
             geometry columns are encoded to WKB
         """
         ...
-    
-    def to_wkt(self, **kwargs): # -> DataFrame:
+    def to_wkt(self, **kwargs):  # -> DataFrame:
         """
         Encode all geometry columns in the GeoDataFrame to WKT.
 
@@ -568,8 +567,7 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
             geometry columns are encoded to WKT
         """
         ...
-    
-    def to_parquet(self, path, index=..., compression=..., **kwargs): # -> None:
+    def to_parquet(self, path, index=..., compression=..., **kwargs):  # -> None:
         """Write a GeoDataFrame to the Parquet format.
 
         Any geometry columns present are serialized to WKB format in the file.
@@ -612,8 +610,7 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
         GeoDataFrame.to_file : write GeoDataFrame to file
         """
         ...
-    
-    def to_feather(self, path, index=..., compression=..., **kwargs): # -> None:
+    def to_feather(self, path, index=..., compression=..., **kwargs):  # -> None:
         """Write a GeoDataFrame to the Feather format.
 
         Any geometry columns present are serialized to WKB format in the file.
@@ -657,8 +654,9 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
         GeoDataFrame.to_file : write GeoDataFrame to file
         """
         ...
-    
-    def to_file(self, filename, driver=..., schema=..., index=..., **kwargs): # -> None:
+    def to_file(
+        self, filename, driver=..., schema=..., index=..., **kwargs
+    ):  # -> None:
         """Write the ``GeoDataFrame`` to a file.
 
         By default, an ESRI shapefile is written, but any OGR data source
@@ -717,8 +715,9 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
         >>> gdf.to_file('dataframe.shp', mode="a")  # doctest: +SKIP
         """
         ...
-    
-    def set_crs(self, crs=..., epsg=..., inplace=..., allow_override=...): # -> DataFrame | GeoDataFrame:
+    def set_crs(
+        self, crs=..., epsg=..., inplace=..., allow_override=...
+    ):  # -> DataFrame | GeoDataFrame:
         """
         Set the Coordinate Reference System (CRS) of the ``GeoDataFrame``.
 
@@ -789,8 +788,9 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
 
         """
         ...
-    
-    def to_crs(self, crs=..., epsg=..., inplace=...): # -> GeoDataFrame | DataFrame | None:
+    def to_crs(
+        self, crs=..., epsg=..., inplace=...
+    ):  # -> GeoDataFrame | DataFrame | None:
         """Transform geometries to a new coordinate reference system.
 
         Transform all geometries in an active geometry column to a different coordinate
@@ -867,8 +867,7 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
         GeoDataFrame.set_crs : assign CRS without re-projection
         """
         ...
-    
-    def estimate_utm_crs(self, datum_name=...): # -> Any:
+    def estimate_utm_crs(self, datum_name=...):  # -> Any:
         """Returns the estimated UTM CRS based on the bounds of the dataset.
 
         .. versionadded:: 0.9
@@ -907,23 +906,22 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
         - Prime Meridian: Greenwich
         """
         ...
-    
-    def __getitem__(self, key): # -> Series[Dtype@__getitem__] | <subclass of Series and DataFrame>:
+    def __getitem__(
+        self, key
+    ):  # -> Series[Dtype@__getitem__] | <subclass of Series and DataFrame>:
         """
         If the result is a column containing only 'geometry', return a
         GeoSeries. If it's a DataFrame with a 'geometry' column, return a
         GeoDataFrame.
         """
         ...
-    
-    def __setitem__(self, key, value): # -> None:
+    def __setitem__(self, key, value):  # -> None:
         """
         Overwritten to preserve CRS of GeometryArray in cases like
         df['geometry'] = [geom... for geom in df.geometry]
         """
         ...
-    
-    def merge(self, *args, **kwargs): # -> DataFrame:
+    def merge(self, *args, **kwargs):  # -> DataFrame:
         r"""Merge two ``GeoDataFrame`` objects with a database-style join.
 
         Returns a ``GeoDataFrame`` if a geometry column is present; otherwise,
@@ -945,16 +943,21 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
 
         """
         ...
-    
     @inherit_doc(pd.DataFrame)
-    def apply(self, func, axis=..., raw=..., result_type=..., args=..., **kwargs): # -> GeoDataFrame:
+    def apply(self, func, axis=..., raw=..., result_type=..., args=..., **kwargs): ...
+    def __finalize__(self, other, method=..., **kwargs):  # -> NDFrame:
+        """propagate metadata from other to self"""
         ...
-    
-    def __finalize__(self, other, method=..., **kwargs): # -> NDFrame:
-        """propagate metadata from other to self """
-        ...
-    
-    def dissolve(self, by=..., aggfunc=..., as_index=..., level=..., sort=..., observed=..., dropna=...): # -> DataFrame:
+    def dissolve(
+        self,
+        by=...,
+        aggfunc=...,
+        as_index=...,
+        level=...,
+        sort=...,
+        observed=...,
+        dropna=...,
+    ):  # -> DataFrame:
         """
         Dissolve geometries within `groupby` into single observation.
         This is accomplished by applying the `unary_union` method
@@ -1032,8 +1035,7 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
 
         """
         ...
-    
-    def explode(self, column=..., **kwargs): # -> DataFrame:
+    def explode(self, column=..., **kwargs):  # -> DataFrame:
         """
         Explode muti-part geometries into multiple single geometries.
 
@@ -1083,8 +1085,7 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
 
         """
         ...
-    
-    def astype(self, dtype, copy=..., errors=..., **kwargs): # -> DataFrame:
+    def astype(self, dtype, copy=..., errors=..., **kwargs):  # -> DataFrame:
         """
         Cast a pandas object to a specified dtype ``dtype``.
 
@@ -1098,8 +1099,17 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
         GeoDataFrame or DataFrame
         """
         ...
-    
-    def to_postgis(self, name, con, schema=..., if_exists=..., index=..., index_label=..., chunksize=..., dtype=...): # -> None:
+    def to_postgis(
+        self,
+        name,
+        con,
+        schema=...,
+        if_exists=...,
+        index=...,
+        index_label=...,
+        chunksize=...,
+        dtype=...,
+    ):  # -> None:
         """
         Upload GeoDataFrame into PostGIS database.
 
@@ -1150,27 +1160,22 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
 
         """
         ...
-    
-    def __xor__(self, other): # -> Any:
+    def __xor__(self, other):  # -> Any:
         """Implement ^ operator as for builtin set type"""
         ...
-    
-    def __or__(self, other): # -> Any:
+    def __or__(self, other):  # -> Any:
         """Implement | operator as for builtin set type"""
         ...
-    
-    def __and__(self, other): # -> Any:
+    def __and__(self, other):  # -> Any:
         """Implement & operator as for builtin set type"""
         ...
-    
-    def __sub__(self, other): # -> Any:
+    def __sub__(self, other):  # -> Any:
         """Implement - operator as for builtin set type"""
         ...
-    
     if compat.PANDAS_GE_025:
         plot = ...
     else:
-        def plot(self, *args, **kwargs): # -> Axes:
+        def plot(self, *args, **kwargs):  # -> Axes:
             """Generate a plot of the geometries in the ``GeoDataFrame``.
             If the ``column`` parameter is given, colors plot according to values
             in that column, otherwise calls ``GeoSeries.plot()`` on the
@@ -1179,6 +1184,3 @@ box': (2.0, 1.0, 2.0, 1.0)}], 'bbox': (1.0, 1.0, 2.0, 2.0)}
             from there.
             """
             ...
-        
-
-

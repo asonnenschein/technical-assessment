@@ -8,10 +8,11 @@ import attr
 SCHEMES = ...
 CURLSCHEMES = ...
 REMOTESCHEMES = ...
+
 class Path:
     """Base class for dataset paths"""
-    ...
 
+    ...
 
 @attr.s(slots=True)
 class ParsedPath(Path):
@@ -27,29 +28,24 @@ class ParsedPath(Path):
     scheme : str
         URI scheme such as "https" or "zip+s3".
     """
+
     path = ...
     archive = ...
     scheme = ...
     @classmethod
-    def from_uri(cls, uri): # -> ParsedPath:
-        ...
-    
+    def from_uri(cls, uri): ...
     @property
-    def name(self): # -> Any | str:
+    def name(self):  # -> Any | str:
         """The parsed path's original URI"""
         ...
-    
     @property
-    def is_remote(self): # -> Any | bool:
+    def is_remote(self):  # -> Any | bool:
         """Test if the path is a remote, network URI"""
         ...
-    
     @property
-    def is_local(self): # -> Any | bool:
+    def is_local(self):  # -> Any | bool:
         """Test if the path is a local URI"""
         ...
-    
-
 
 @attr.s(slots=True)
 class UnparsedPath(Path):
@@ -60,15 +56,14 @@ class UnparsedPath(Path):
     path : str
         The legacy GDAL filename.
     """
+
     path = ...
     @property
-    def name(self): # -> Any:
+    def name(self):  # -> Any:
         """The unparsed path's original path"""
         ...
-    
 
-
-def parse_path(path): # -> Path | UnparsedPath | ParsedPath:
+def parse_path(path):  # -> Path | UnparsedPath | ParsedPath:
     """Parse a dataset's identifier or path into its parts
 
     Parameters
@@ -87,7 +82,7 @@ def parse_path(path): # -> Path | UnparsedPath | ParsedPath:
     """
     ...
 
-def vsi_path(path): # -> Any | str:
+def vsi_path(path):  # -> Any | str:
     """Convert a parsed path to a GDAL VSI path
 
     Parameters
@@ -100,4 +95,3 @@ def vsi_path(path): # -> Any | str:
     str
     """
     ...
-

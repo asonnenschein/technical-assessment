@@ -8,4 +8,3 @@ from .overlay import overlay
 from .sjoin import sjoin
 from .util import collect
 from .clip import clip
-

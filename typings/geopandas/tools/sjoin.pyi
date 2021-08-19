@@ -79,4 +79,3 @@ stria    AUT    416600.0
     dimension is not taken into account.
     """
     ...
-

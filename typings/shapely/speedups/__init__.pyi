@@ -8,12 +8,12 @@ from functools import wraps
 from shapely.geometry import linestring, polygon
 from shapely import coords
 
-def method_wrapper(f): # -> (*args: Unknown, **kwargs: Unknown) -> Unknown:
-    ...
+def method_wrapper(f): ...
 
 _orig = ...
 enabled = ...
-def enable(): # -> None:
+
+def enable():  # -> None:
     """Enable Cython speedups
 
     The shapely.speedups module contains performance enhancements written in C.
@@ -32,10 +32,8 @@ def enable(): # -> None:
     """
     ...
 
-def disable(): # -> None:
-    """Disable Cython speedups
-    """
+def disable():  # -> None:
+    """Disable Cython speedups"""
     ...
 
-if available:
-    ...
+if available: ...
