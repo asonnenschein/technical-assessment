@@ -39,7 +39,7 @@ python run.py
 ```
 
 ## Notes
-- This application is a prototype, or proof of concept.  It is not intended to run in a production environment as is.
+- This application is a prototype, or proof of concept.  It is not intended to run in a production environment as is.  As such, it does not currently do any application specific logging - adding DEBUG/ERROR/INFO logging would be a logical next step.
 - Source COG and GPKG data assets exceed GitHub's file size limit of 100MB, and are therefore not included in this repository.
 - Python software standards are enforced via `black` utility.  Type hints are included wherever possible across the software.
 - PNG and JSON XYZ tiles are generated dynamically, on-the-fly, when invoked via REST API service controller.  These data are generated from source COG and GPKG files that are cached in-memory in the Python server upon startup.  This allows API views to easily access the already cached in-memory source data files without having to read the data from disk on the file system every time a service controller is requested, thereby reducing I/O bound complexity of the process.  Simplicity of this performance optimization comes at the expense of durability - it is not a persistent cache, and can put a strain on failover and undermine high availability (because I/O bound complexity is moved to server startup).  In a production environment, it would make a lot more sense to make source data available via persistent cache that is decoupled from the core Python server.  This would remove I/O bound complexity from the REST API, and improve consistency across horizontally scaled application servers by being a single source of truth for source data files.
