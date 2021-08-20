@@ -1,6 +1,7 @@
 # Project specific folders and files
 data
-venv
+venv/homework.tiff
+venv/homework.geojson
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
