@@ -1,7 +1,7 @@
 # Project specific folders and files
+.DS_STORE
 data
-venv/homework.tiff
-venv/homework.geojson
+venv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

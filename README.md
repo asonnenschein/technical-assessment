@@ -1,20 +1,44 @@
-# technical-assessment
+# Technical Assessment
+This software is a Python REST API that serves PNG and JSON XYZ map tiles from cached COG and GPKG data sources.  It is a prototype that is part of a technical assessment to demonstrate competency in HTTP API design, geoscientific programming, and data engineering.
 
-### Serving data
+## Requirements
+- git >= 2.30.1
+- libspatialindex >= 1.9.3
+- Python >= 3.9.6
 
-Install project locally by running 'pip install .' in same directory as setup.py
+## Installation, Tests, and Running the Development Server
+1. Clone this GitHub repository:
+```
+git clone git@github.com:asonnenschein/technical-assessment.git
+```
 
-1.
-Create Python3 virtual environment, activate it, and add to gitignore:
-
+2. Create a Python >= 3.9.6 virtual environment:
+```
 python3 -m venv venv
+```
+
+3. Activate Python >= 3.9.6 virtual environment:
+```
 . venv/bin/activate
+```
 
-Install Python requirements and create requirements.txt:
+4. Install project and dependencies into virtual environment.  These commands should be run in the root level of the project:
+```
+pip install .
+pip install -r requirements.txt
+```
 
-pip install flask
+5. Run feature tests to confirm that the software is installed correctly.  This command should be run in the root level of the project:
+```
+pytest tests/*
+```
 
-2.  MAKE SURE 'brew install spatialindex' FOR GEOPANDAS RTREE
+5. Run development server.  This command should be run in the root level of the project:
+```
+python run.py
+```
 
-### NOTES
-Make sure to include COG, GPKG, and OOB PNG in repository before submitting!
+## Notes
+- This application is a prototype, or proof of concept.  It is not intended to run in a production environment as is.
+- PNG and JSON XYZ tiles are generated dynamically, on-the-fly, when invoked via REST API service controller.  These data are generated from source COG and GPKG files that are cached in-memory in the Python server upon startup.  This allows API views to easily access the already cached in-memory source data files without having to read the data from disk on the file system every time a service controller is requested, thereby reducing I/O bound complexity of the process.  Simplicity of this performance optimization comes at the expense of durability - it is not a persistent cache, and can put a strain on failover and undermine high availability (because I/O bound complexity is moved to server startup).  In a production environment, it would make a lot more sense to make source data available via persistent cache that is decoupled from the core Python server.  This would remove I/O bound complexity from the REST API, and improve consistency across horizontally scaled application servers by being a single source of truth for source data files.
+- All service controllers in this application resolve to views that execute complex geospatial process, which adds CPU bound complexity.  Rigorous performance testing and profiling of these algorithms should be conducted to identify potential bottlenecks.  Results of performance testing and profiling will help inform whether or not it is safe to go to production with the existing synchronous execution pattern, or if it makes more sense to refactor CPU bound complexity into an asynchronous execution pattern that can operate more efficiently within each thread.
