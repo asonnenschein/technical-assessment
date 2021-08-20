@@ -47,6 +47,7 @@ gdal_translate -b 1 -b 2 -b 3 homework.tiff homework_rgb.tiff
 ```
 
 3. Convert `homework_rgb.tiff` to COG file named `homework_cog.tiff`:
+
 GDAL Example
 ```
 gdal_translate homework_rgb.tiff homework_cog.tiff -of COG 

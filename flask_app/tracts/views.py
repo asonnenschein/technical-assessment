@@ -20,9 +20,16 @@ tracts: Blueprint = Blueprint("tracts", __name__)
 MIN_Z: int = 0
 MAX_Z: int = 15
 
-
+# Flask will resolve to GET HTTP method by default when the 'methods' parameter is not included in the 'Blueprint.route()' method
 @tracts.route("/tracts-tiles")
 def get_tracts_tiles() -> Response:
+    """Produces metadata about available JSON XYZ tiles within the extent of the GPKG dataset that is cached in-memory
+    on the server at startup time.
+
+    Returns:
+        Response: Flask HTTP response object with content-type 'application/json'
+    """
+
     geopackage: GeoDataFrame = current_app.config.get("GPKG")
     bbox: ndarray[float, Any] = geopackage.geometry.total_bounds
     tms: TileMatrixSet = morecantile.tms.get("WebMercatorQuad")
@@ -41,23 +48,34 @@ def get_tracts_tiles() -> Response:
         data["tiles"].append({"x": tile.x, "y": tile.y, "z": tile.z})
     return jsonify(data)
 
-
+# Flask will resolve to GET HTTP method by default when the 'methods' parameter is not included in the 'Blueprint.route()' method
 @tracts.route("/tracts/<int:z>/<int:x>/<int:y>.json")
 def get_tracts(z: int, x: int, y: int) -> Response:
-    geopackage: GeoDataFrame = current_app.config.get("GPKG")
-    bbox: LngLatBbox = mercantile.bounds(mercantile.Tile(x=x, y=y, z=z))
+    """Fetches individual JSON XYZ map tiles based on controller input.  Tiles are sourced from the GPKG dataset that 
+    is cached in-memory on the server at startup time, and are rendered on-the-fly as JSON.  If input XYZ location does
+    not fall within the bounds of the GPKG, an empty JSON object is returned by default.
 
-    polygon = Polygon(
-        [
-            (bbox.west, bbox.north),
-            (bbox.west, bbox.south),
-            (bbox.east, bbox.south),
-            (bbox.west, bbox.north),
-        ]
-    )
-
-    clipped_gpkg: GeoDataFrame = geopandas.clip(geopackage, polygon)
-
-    clipped_json = json.loads(clipped_gpkg.to_json())
-
-    return jsonify(clipped_json)
+    Args:
+        z (int): Zoom level of tile
+        x (int): Location of tile on horizontal x-axis
+        y (int): Location of tile on vertical y-axis
+    
+    Returns:
+        Response: Flask HTTP response with content-type 'application/json'
+    """
+    try:
+        geopackage: GeoDataFrame = current_app.config.get("GPKG")
+        bbox: LngLatBbox = mercantile.bounds(mercantile.Tile(x=x, y=y, z=z))
+        polygon = Polygon(
+            [
+                (bbox.west, bbox.north),
+                (bbox.west, bbox.south),
+                (bbox.east, bbox.south),
+                (bbox.west, bbox.north),
+            ]
+        )
+        clipped_gpkg: GeoDataFrame = geopandas.clip(geopackage, polygon)
+        clipped_json = json.loads(clipped_gpkg.to_json())
+        return jsonify(clipped_json)
+    except OverflowError:
+        return jsonify({})

@@ -14,9 +14,16 @@ from rio_tiler.utils import render
 
 imagery: Blueprint = Blueprint("imagery", __name__)
 
-
+# Flask will resolve to GET HTTP method by default when the 'methods' parameter is not included in the 'Blueprint.route()' method
 @imagery.route("/imagery-tiles")
 def get_imagery_tiles() -> Response:
+    """Produces metadata about available PNG XYZ tiles within the extent of the COG dataset that is cached in-memory on
+    the server at startup time.
+
+    Returns:
+        Response: Flask HTTP response object with content-type 'application/json'
+    """
+
     image: COGReader = current_app.config.get("COG")
     tms: TileMatrixSet = morecantile.tms.get("WebMercatorQuad")
     data: Dict[str, Any] = {
@@ -32,9 +39,23 @@ def get_imagery_tiles() -> Response:
         data["tiles"].append({"x": tile.x, "y": tile.y, "z": tile.z})
     return jsonify(data)
 
-
+# Flask will resolve to GET HTTP method by default when the 'methods' parameter is not included in the 'Blueprint.route()' method
 @imagery.route("/imagery/<int:z>/<int:x>/<int:y>.png")
 def get_imagery(z: int, x: int, y: int) -> Response:
+    """Fetches individual PNG XYZ map tiles based on controller input.  Tiles are sourced from the COG dataset that is 
+    cached in-memory on the server at startup time, and are rendered on-the-fly as PNG.  If input XYZ location does not
+    fall within the bounds of the COG, a transparent PNG is returned by default.  The transparent PNG is not rendered 
+    on-the-fly; like the COG, it is a static data asset that is cached in-memory on the server at startup time.
+    
+    Args:
+        z (int): Zoom level of tile
+        x (int): Location of tile on horizontal x-axis
+        y (int): Location of tile on vertical y-axis
+    
+    Returns:
+        Response: Flask HTTP response with content-type 'image/png'
+    """
+
     image: COGReader = current_app.config.get("COG")
     out_of_bounds_tile = current_app.config.get("OOB")
     try:
