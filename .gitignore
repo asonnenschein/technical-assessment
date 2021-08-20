@@ -1,6 +1,6 @@
 # Project specific folders and files
 .DS_STORE
-data
+data*
 venv
 
 # Byte-compiled / optimized / DLL files

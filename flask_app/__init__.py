@@ -8,6 +8,7 @@ from rio_tiler.io import COGReader
 from flask_app.imagery.views import imagery
 from flask_app.tracts.views import tracts
 
+
 def create_app() -> Flask:
     app: Flask = Flask(__name__)
 
