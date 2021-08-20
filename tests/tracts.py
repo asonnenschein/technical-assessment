@@ -22,7 +22,7 @@ def test_get_tracts_success(client: FlaskClient):
 
 
 def test_get_tracts_failure(client: FlaskClient):
-    """Fetch a single JSON XYZ map tile at an input location that does not exist, and confirm graceful failure of the 
+    """Fetch a single JSON XYZ map tile at an input location that does not exist, and confirm graceful failure of the
     response.
 
     Args:

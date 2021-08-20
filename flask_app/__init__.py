@@ -11,7 +11,7 @@ from flask_app.tracts.views import tracts
 
 
 def create_app() -> Flask:
-    """Factory for instaniating and initializing Flask Python servers.  In addition to spinning up a vanilla Flask 
+    """Factory for instaniating and initializing Flask Python servers.  In addition to spinning up a vanilla Flask
     server, this method opens three different static data assets and caches them in-memory in the 'Flask.config' object.
 
     Returns:
